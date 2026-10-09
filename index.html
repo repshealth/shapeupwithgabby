@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shape Up with Gabby | Training, nutrition and community in one app</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (map these to Elementor Global Colours / Fonts) ===== */
+:root{
+  --su-ink:#121212;
+  --su-body:#3d3d3d;
+  --su-muted:#7a7a7a;
+  --su-yellow:#FDE08D;
+  --su-cream:#FFF7DD;
+  --su-blue:#62BAF5;
+  --su-blue-soft:#EAF4FE;
+  --su-blue-line:#9FD2F8;
+  --su-white:#ffffff;
+  --su-head:'Oswald','Arial Narrow',Arial,sans-serif;
+  --su-text:'Poppins',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --su-wrap:1180px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+body{margin:0;background:#fff;color:var(--su-ink);font-family:var(--su-text);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--su-blue);outline-offset:3px}
+.su-wrap{max-width:var(--su-wrap);margin:0 auto;padding:0 24px}
+
+/* Headings: light line + bold line */
+.su-h2{font-family:var(--su-head);text-transform:uppercase;font-size:clamp(36px,5vw,58px);line-height:1.02;margin:0;font-weight:300;letter-spacing:-.5px}
+.su-h2 strong{font-weight:700;display:block}
+.su-h2 b{font-weight:700}
+.su-eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--su-muted);margin:0 0 14px}
+.su-intro{max-width:300px;font-size:14px;line-height:1.55;color:var(--su-ink);margin:0}
+.su-head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:48px}
+
+/* Buttons */
+.su-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-family:var(--su-text);font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;padding:15px 34px;border:1.5px solid transparent;cursor:pointer;transition:transform .15s ease}
+.su-btn:hover{transform:translateY(-1px)}
+.su-btn--blue{background:var(--su-blue);color:#fff}
+.su-btn--yellow{background:var(--su-yellow);color:var(--su-ink)}
+.su-btn--outline{background:#fff;border-color:var(--su-ink);color:var(--su-ink)}
+.su-btn--ghost{background:#fff;border-color:#cfcfcf;color:var(--su-ink)}
+
+/* ===== Header ===== */
+.su-header{position:sticky;top:0;z-index:50;padding:12px 24px 0;margin-bottom:-90px}
+.su-nav{max-width:1220px;margin:0 auto;background:rgba(255,253,245,.92);backdrop-filter:blur(10px);border-radius:999px;box-shadow:0 6px 24px rgba(180,150,60,.12);display:flex;align-items:center;justify-content:space-between;padding:10px 10px 10px 28px}
+.su-logo img{height:26px;width:auto}
+.su-nav ul{list-style:none;display:flex;gap:30px;margin:0;padding:0}
+.su-nav ul a{text-decoration:none;font-weight:600;font-size:13px}
+.su-nav-right{display:flex;align-items:center;gap:22px}
+.su-login{font-size:13px;font-weight:500;text-decoration:none;color:var(--su-ink)}
+.su-burger{display:none;width:42px;height:42px;border-radius:12px;background:var(--su-yellow);border:0;cursor:pointer;align-items:center;justify-content:center}
+.su-burger span{display:block;width:16px;height:2px;background:var(--su-ink);box-shadow:0 5px 0 var(--su-ink),0 -5px 0 var(--su-ink)}
+.su-mobile-menu{display:none}
+
+/* ===== Hero ===== */
+.su-hero{position:relative;background:radial-gradient(60% 55% at 62% 30%,#FFE9A8 0%,rgba(255,240,190,0) 70%),linear-gradient(180deg,#FFF6D9 0%,#FFFBEE 70%,#fff 100%);padding:150px 0 0;overflow:hidden}
+.su-hero-grid{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:20px;min-height:560px}
+.su-rating{display:inline-flex;align-items:center;gap:10px;background:#fff;border-radius:999px;padding:6px 14px 6px 6px;font-size:12px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.su-avatars{display:flex}
+.su-avatars img{width:24px;height:24px;border-radius:50%;border:2px solid #fff;object-fit:cover;margin-left:-7px}
+.su-avatars img:first-child{margin-left:0}
+.su-stars{color:#F6C21B;letter-spacing:1px}
+.su-hero h1{font-family:var(--su-head);font-weight:500;text-transform:uppercase;font-size:clamp(40px,5.6vw,66px);line-height:1;margin:22px 0 16px;letter-spacing:-.3px}
+.su-hero p.lead{font-size:15px;margin:0 0 28px;max-width:430px}
+.su-hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.su-hero-note{font-size:11px;font-weight:600;letter-spacing:1.4px;color:var(--su-muted);margin-top:18px;text-transform:uppercase}
+.su-hero-art{position:relative;height:580px}
+.su-hero-gabby{position:absolute;left:0;bottom:-20px;height:600px;width:auto;z-index:1}
+.su-phone{background:#fff;border:3px solid var(--su-blue);border-radius:30px;padding:5px;box-shadow:0 18px 40px rgba(60,120,170,.18);overflow:hidden}
+.su-phone img{border-radius:24px;width:100%;height:auto}
+.su-hero-phone1{position:absolute;width:220px;left:250px;top:70px;transform:rotate(-4deg);z-index:3}
+.su-hero-phone2{position:absolute;width:190px;left:390px;top:20px;transform:rotate(-6deg);z-index:2}
+
+/* Marquee strip */
+.su-strip{position:relative;z-index:4;margin-top:-30px;height:110px}
+.su-strip::before{content:"";position:absolute;inset:30px -20px 20px;background:var(--su-yellow);transform:rotate(-1deg)}
+.su-strip-band{position:absolute;left:-30px;right:-30px;top:20px;background:var(--su-blue);transform:rotate(-3deg);overflow:hidden;padding:14px 0;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.su-strip-track{display:flex;gap:46px;width:max-content;animation:su-marquee 32s linear infinite;color:#fff;font-size:17px;text-transform:uppercase;white-space:nowrap;align-items:center}
+.su-strip-track b{font-weight:700}
+.su-strip-track .spark{color:#FFE08A;font-size:22px}
+@keyframes su-marquee{to{transform:translateX(-50%)}}
+
+/* ===== What Shape Up is ===== */
+.su-about{padding:70px 0 120px;position:relative}
+.su-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.su-about p{max-width:400px;font-size:14.5px;margin:0 0 14px}
+.su-about p.sub{color:var(--su-body)}
+.su-about .su-h2{margin-bottom:26px}
+.su-facts{display:flex;gap:36px;margin-top:40px}
+.su-facts strong{display:block;font-family:var(--su-head);font-size:24px;font-weight:500;line-height:1.1}
+.su-facts span{font-size:10px;letter-spacing:1.3px;color:var(--su-muted);font-weight:600;text-transform:uppercase}
+.su-about-phones{position:relative;height:500px}
+.su-about-phones .a{position:absolute;width:200px;left:12%;top:60px}
+.su-about-phones .b{position:absolute;width:220px;left:40%;top:0;z-index:2}
+
+/* Wave divider helper */
+.su-wave{display:block;width:100%;height:70px}
+
+/* ===== What's inside (app spotlight) ===== */
+.su-fx{background:linear-gradient(180deg,var(--su-blue-soft) 0%,var(--su-blue-soft) 90%,#fff 100%);padding:50px 0 100px}
+.su-fx-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:70px;align-items:center}
+.su-fx-intro{font-size:14.5px;max-width:420px;margin:18px 0 30px}
+.su-fx-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(0,0,0,.1)}
+.su-fx-item{border-bottom:1px solid rgba(0,0,0,.1)}
+.su-fx-item button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:44px 1fr 24px;align-items:center;padding:18px 0;font-family:var(--su-head);font-size:22px;font-weight:500;text-transform:uppercase;color:#6f7d8a;transition:color .2s}
+.su-fx-item button:focus-visible{outline:3px solid var(--su-blue);outline-offset:2px}
+.su-fx-item .ic{font-size:22px;filter:grayscale(1);opacity:.5;transition:all .2s}
+.su-fx-item .pl{font-family:var(--su-text);font-size:20px;font-weight:400;transition:transform .2s}
+.su-fx-item p{margin:0;max-height:0;overflow:hidden;font-size:14px;color:var(--su-body);padding-left:44px;transition:max-height .35s ease,padding .35s ease}
+.su-fx-item.on button{color:var(--su-ink)}
+.su-fx-item.on .ic{filter:none;opacity:1}
+.su-fx-item.on .pl{transform:rotate(45deg)}
+.su-fx-item.on p{max-height:120px;padding-bottom:18px}
+.su-fx-stage{position:relative;height:620px;display:flex;align-items:center;justify-content:center}
+.su-fx-stage::before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;background:var(--su-yellow)}
+.su-fx-stage .su-phone{position:relative;width:280px;z-index:2}
+.su-fx img{transition:opacity .3s}
+.su-fx-chip{position:absolute;z-index:3;background:#fff;border-radius:14px;padding:10px 14px;font-size:12px;font-weight:600;box-shadow:0 12px 30px rgba(40,90,140,.15);display:flex;align-items:center;gap:8px}
+.su-fx-chip span{font-size:18px}
+.su-fx-chip.c1{top:110px;left:20px}.su-fx-chip.c2{bottom:120px;right:10px}
+.su-fx-cta{margin-top:30px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.su-fx-cta small{font-size:12px;color:var(--su-muted)}
+.su-fx-tabs,.su-fx-panel{display:none}
+
+/* ===== Inside the app ===== */
+.su-app{padding:90px 0 110px}
+.su-app-phones{display:flex;justify-content:center;align-items:flex-start;gap:16px;margin:30px 0 48px}
+.su-app-phones .su-phone{width:166px;flex:0 0 auto;margin-top:70px}
+.su-app-phones .su-phone:nth-child(2),.su-app-phones .su-phone:nth-child(4){margin-top:30px}
+.su-app-phones .su-phone:nth-child(3){margin-top:0}
+.su-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:800px;margin:0 auto}
+.su-pill{border:1.5px solid var(--su-blue-line);background:#fff;border-radius:999px;padding:8px 18px;font-size:13.5px;font-weight:500}
+.su-pill:nth-child(odd){background:#D6ECFD}
+.su-pill i{font-style:normal;margin-right:6px}
+
+/* ===== Pricing ===== */
+.su-pricing{position:relative;background:linear-gradient(180deg,var(--su-cream) 0%,var(--su-cream) 88%,#fff 100%);padding:30px 0 70px;text-align:center}
+.su-pricing .su-h2 strong{display:inline}
+.su-pricing .lede{max-width:470px;margin:14px auto 46px;font-size:14px}
+.su-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left}
+.su-plan{position:relative;background:#fff;border:1.5px solid #F4E3A8;border-radius:16px;overflow:visible;display:flex;flex-direction:column}
+.su-plan .ph{height:180px;overflow:hidden;border-radius:15px 15px 0 0}
+.su-plan .ph img{width:100%;height:100%;object-fit:cover}
+.su-plan .bd{padding:18px 16px 24px;display:flex;flex-direction:column;flex:1}
+.su-plan .term{font-size:10px;font-weight:600;letter-spacing:1.6px;color:var(--su-muted);text-transform:uppercase}
+.su-plan .price{display:flex;align-items:baseline;gap:6px;margin:4px 0 8px;flex-wrap:wrap}
+.su-plan .price b{font-family:var(--su-head);font-size:40px;font-weight:700;line-height:1}
+.su-plan .price span{font-size:11px}
+.su-plan .day{align-self:flex-start;background:var(--su-yellow);border-radius:999px;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 10px;text-transform:uppercase;margin-bottom:16px}
+.su-plan .su-btn{width:100%;padding:12px}
+.su-plan .desc{border-top:1px solid #ddd;margin-top:14px;padding-top:14px;text-align:center;font-size:13px}
+.su-plan--pop{background:var(--su-yellow);border-color:var(--su-yellow)}
+.su-plan--pop .term{color:var(--su-ink)}
+.su-plan--pop .day{background:transparent;border:1.5px solid var(--su-ink)}
+.su-plan--pop .su-btn{background:#fff}
+.su-plan--pop .desc{border-color:rgba(0,0,0,.15)}
+.su-plan .badge{position:absolute;top:-10px;left:18px;z-index:2;background:#fff;border-radius:999px;font-size:9px;font-weight:700;letter-spacing:1.3px;padding:4px 10px;text-transform:uppercase;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.su-ticks{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 24px;margin:28px 0 0;font-size:12px;list-style:none;padding:0}
+.su-ticks li{display:flex;align-items:center;gap:7px}
+.su-ticks li::before{content:"✓";display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--su-ink);color:#fff;font-size:9px;font-weight:700}
+.su-featured--hero{margin-top:34px;padding-top:22px;border-top:1px solid rgba(0,0,0,.08);max-width:440px}
+.su-featured--hero p{font-size:9px;letter-spacing:1.8px;font-weight:600;color:var(--su-muted);text-transform:uppercase;margin:0 0 12px}
+.su-featured--hero .logos{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.su-featured--hero img{height:22px;width:auto}
+.su-featured--hero .wf{background:#000;padding:3px 7px;height:24px}
+
+/* ===== Programmes ===== */
+.su-progs{padding:70px 0 100px}
+.su-prog-side{display:flex;flex-direction:column;align-items:flex-end;gap:18px}
+.su-arrows{display:flex;gap:10px}
+.su-arrow{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--su-ink);background:#fff;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;padding-bottom:3px}
+.su-arrow:hover{background:var(--su-yellow)}
+.su-arrow:disabled{opacity:.3;cursor:default;background:#fff}
+.su-prog-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px max(24px,calc((100vw - var(--su-wrap))/2 + 24px)) 18px;scroll-padding-left:max(24px,calc((100vw - var(--su-wrap))/2 + 24px));scrollbar-width:none}
+.su-prog-track::-webkit-scrollbar{display:none}
+.su-pcard{flex:0 0 300px;scroll-snap-align:start}
+.su-pcard .ph{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#eee;margin-bottom:16px}
+.su-pcard .ph img{width:100%;height:100%;object-fit:cover}
+.su-pcard h3{font-family:var(--su-head);font-weight:500;font-size:20px;text-transform:uppercase;margin:0 0 6px}
+.su-pcard p:not(.su-meta){font-size:13px;color:var(--su-body);margin:0;line-height:1.5}
+.su-pcard .play{position:absolute;top:14px;left:14px;width:42px;height:42px;border-radius:50%;background:var(--su-blue);display:grid;place-items:center;color:#fff;font-size:13px;border:0;cursor:pointer}
+.su-tag{position:absolute;top:12px;left:12px;background:var(--su-yellow);font-family:var(--su-head);font-weight:700;font-size:11px;letter-spacing:.6px;padding:3px 8px;border-radius:4px;text-transform:uppercase}
+.su-meta{font-size:9.5px;letter-spacing:1.5px;font-weight:600;color:var(--su-muted);text-transform:uppercase;margin:0 0 6px}
+.su-compare{margin-top:30px;background:var(--su-blue);border-radius:14px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 22px 22px 22px}
+.su-compare p{margin:0;font-size:15.5px;max-width:460px}
+
+.su-oneoff-btn{display:flex;justify-content:center;margin-top:14px}
+.su-oneoff-btn .su-btn:hover{background:var(--su-yellow);border-color:var(--su-yellow)}
+
+/* ===== Results ===== */
+.su-results{padding:30px 0 80px}
+.su-reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.su-review{border:1px solid #e3e3e3;border-radius:16px;padding:22px 18px}
+.su-review .stars{color:#F6C21B;font-size:12px;letter-spacing:2px}
+.su-review blockquote{margin:12px 0 14px;font-size:13.5px;font-weight:500;line-height:1.45}
+.su-review cite{font-style:normal;font-size:9.5px;letter-spacing:1.3px;font-weight:600;color:var(--su-muted);text-transform:uppercase}
+.su-videos-h{font-family:var(--su-head);font-weight:500;font-size:20px;text-transform:uppercase;margin:46px 0 14px}
+
+.su-story{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);border-radius:18px;overflow:hidden;background:var(--su-yellow)}
+.su-story .ph{position:relative;background:#fff;min-height:460px}
+.su-story .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.su-story .txt{padding:34px 34px 30px;display:flex;flex-direction:column}
+.su-story .stars{color:#fff;font-size:13px;letter-spacing:2px}
+.su-story h3{font-family:var(--su-head);font-weight:700;font-size:30px;text-transform:uppercase;margin:10px 0 18px;line-height:1.05}
+.su-story .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.su-story .stats div{background:#fff;border-radius:12px;padding:12px 12px 10px}
+.su-story .stats b{display:block;font-family:var(--su-head);font-size:28px;font-weight:700;line-height:1}
+.su-story .stats span{font-size:10.5px;line-height:1.3;display:block;margin-top:4px}
+.su-story blockquote{margin:0 0 12px;font-size:16px;font-weight:500;line-height:1.45}
+.su-story .extra{margin:0;font-size:13.5px;line-height:1.5}
+.su-story cite{font-style:normal;font-size:10px;letter-spacing:1.4px;font-weight:700;text-transform:uppercase;margin-top:auto;padding-top:20px}
+.lbl{position:absolute;top:12px;z-index:2;font-size:9px;letter-spacing:1px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase}
+.lbl.b{left:12px;background:var(--su-yellow);color:var(--su-ink)}
+.lbl.a{left:calc(50% + 10px);background:var(--su-blue);color:#fff}
+.su-tf-head{display:flex;justify-content:space-between;align-items:flex-end;margin-top:46px;margin-bottom:14px}
+.su-tf-head .su-videos-h{margin:0}
+.su-tf-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:0 max(24px,calc((100vw - var(--su-wrap))/2 + 24px)) 6px;scroll-padding-left:max(24px,calc((100vw - var(--su-wrap))/2 + 24px));scrollbar-width:none}
+.su-tf-track::-webkit-scrollbar{display:none}
+.su-tf{position:relative;flex:0 0 340px;aspect-ratio:1/1;margin:0;border-radius:16px;overflow:hidden;background:#f3f3f3;scroll-snap-align:start}
+.su-tf img{width:100%;height:100%;object-fit:cover}
+
+/* ===== Meet Gabby ===== */
+.su-gabby{background:linear-gradient(180deg,#fff 0%,var(--su-cream) 12%,var(--su-cream) 88%,#fff 100%);padding:90px 0}
+.su-gabby-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:44px;align-items:center}
+.su-gabby-ph{position:relative}
+.su-gabby-ph img{border-radius:14px;width:100%;height:560px;object-fit:contain;background:#FAFAFA}
+.su-gabby-ph .note{position:absolute;left:-8px;bottom:-8px;background:var(--su-yellow);border-radius:8px;padding:12px 14px;font-size:10px;font-weight:600;max-width:150px;line-height:1.35}
+.su-gabby .su-eyebrow{color:var(--su-ink)}
+.su-gabby .su-h2{font-size:clamp(34px,4.5vw,48px);margin-bottom:18px}
+.su-gabby p{font-size:13.5px;margin:0 0 12px}
+.su-creds{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:22px 0 30px;max-width:430px}
+.su-creds .ic{font-size:18px}
+.su-creds b{display:block;font-family:var(--su-head);font-size:19px;font-weight:500;line-height:1.2}
+.su-creds span{font-size:10px;line-height:1.35;display:block;color:var(--su-body)}
+.su-insta{display:inline-flex;align-items:center;gap:8px;border:1px solid #e4d6a8;border-radius:999px;padding:11px 18px;background:#FFFBEF;font-size:10px;font-weight:700;letter-spacing:1.2px;text-decoration:none;text-transform:uppercase}
+
+/* ===== FAQ ===== */
+.su-faq{padding:60px 0 60px}
+.su-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.su-faq-side p{font-size:12.5px;margin:12px 0 22px;max-width:260px}
+.su-faq-side a{font-weight:600;text-decoration:none;border-bottom:2px solid var(--su-yellow)}
+.su-faq-side small{display:block;margin-top:10px;font-size:10px;color:var(--su-muted)}
+.su-faq details{border-bottom:1px solid #e3e3e3}
+.su-faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:28px 1fr 26px;align-items:center;gap:0;padding:16px 0;font-weight:600;font-size:14px}
+.su-faq summary::-webkit-details-marker{display:none}
+.su-faq summary .n{font-size:9px;color:var(--su-muted);letter-spacing:1px}
+.su-faq summary .t{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid #999;font-size:15px;font-weight:400;line-height:1}
+.su-faq details[open]{background:var(--su-blue-soft);border-radius:14px;border-bottom-color:transparent;padding:0 16px 18px;margin:0 -16px 6px}
+.su-faq details[open] summary .t{background:var(--su-blue);border-color:var(--su-blue);color:#fff;transform:rotate(45deg)}
+.su-faq details p{margin:0 0 0 28px;font-size:13.5px;color:var(--su-body);line-height:1.55}
+
+/* ===== Lead magnet ===== */
+.su-lead{background:var(--su-blue);color:#fff;padding:20px 0 60px;position:relative}
+.su-lead-grid{display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:center}
+.su-lead .su-eyebrow{color:#fff}
+.su-lead .su-h2{font-size:clamp(34px,4.4vw,46px)}
+.su-lead p{font-size:12.5px;max-width:310px;margin:12px 0 0}
+.su-form{background:#fff;color:var(--su-ink);border-radius:16px;padding:20px}
+.su-form label{display:block;font-size:9px;font-weight:600;letter-spacing:1.4px;color:var(--su-muted);margin-bottom:10px;text-transform:uppercase}
+.su-form input{width:100%;font:inherit;font-size:13px;padding:12px 16px;border-radius:999px;border:1px solid #e5e5e5;background:#f6f6f6;margin-bottom:12px}
+.su-form .su-btn{width:100%;padding:13px}
+.su-form small{display:block;text-align:center;font-size:9.5px;margin-top:12px;color:var(--su-body)}
+
+/* ===== Footer ===== */
+.su-footer{background:var(--su-yellow);padding:20px 0 20px}
+.su-foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1.2fr .9fr;gap:30px;padding-bottom:40px;border-bottom:1px solid rgba(0,0,0,.12)}
+.su-foot-grid p{font-size:12px;margin:12px 0 18px;max-width:240px}
+.su-stores{display:flex;gap:8px}
+.su-stores img{height:30px;width:auto}
+.su-foot-grid h4{font-size:9px;letter-spacing:1.5px;font-weight:700;margin:6px 0 12px;text-transform:uppercase}
+.su-foot-grid ul{list-style:none;margin:0;padding:0}
+.su-foot-grid li{margin-bottom:5px}
+.su-foot-grid li a{font-size:12.5px;text-decoration:none}
+.su-bigmark{padding:40px 0 30px;border-bottom:1px solid rgba(0,0,0,.12)}
+.su-bigmark img{width:78%;height:auto;opacity:.92}
+.su-legal{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-top:14px;font-size:10px}
+.su-legal nav{display:flex;gap:20px}
+.su-legal a{text-decoration:none}
+
+/* ===== Tablet ===== */
+@media (max-width:1024px){
+  .su-nav ul{gap:18px}
+  .su-hero-phone1{left:150px}.su-hero-phone2{left:270px}
+  .su-app-phones .su-phone{width:140px!important}
+}
+/* ===== Mobile ===== */
+@media (max-width:820px){
+  body{font-size:14.5px}
+  .su-header{padding:10px 12px 0}
+  .su-nav{border-radius:18px;padding:10px 10px 10px 18px}
+  .su-nav ul,.su-nav-right .su-login,.su-nav-right .su-btn{display:none}
+  .su-burger{display:inline-flex}
+  .su-mobile-menu.open{display:block;background:#fff;border-radius:18px;margin-top:8px;padding:12px 18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .su-mobile-menu a{display:block;padding:10px 0;text-decoration:none;font-weight:600;border-bottom:1px solid #eee}
+  .su-mobile-menu a:last-child{border:0}
+  .su-hero{padding-top:110px;text-align:center}
+  .su-hero-grid{grid-template-columns:1fr;min-height:0}
+  .su-hero p.lead{margin:0 auto 22px;font-size:13px}
+  .su-hero-ctas{flex-direction:column}
+  .su-hero-ctas .su-btn{width:100%}
+  .su-hero-art{height:400px;max-width:360px;margin:10px auto 0;width:100%}
+  .su-hero-gabby{height:420px;left:-30px}
+  .su-hero-phone1{width:150px;left:auto;right:30px;top:40px}
+  .su-hero-phone2{width:120px;left:auto;right:4px;top:10px}
+  .su-strip{margin-top:-40px}
+  .su-strip-track{font-size:14px}
+  .su-head-row{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:30px}
+  .su-intro{max-width:none}
+  .su-about{padding:40px 0 70px}
+  .su-about-grid{grid-template-columns:1fr;gap:30px}
+  .su-about-phones{height:330px;max-width:360px;margin:0 auto;width:100%}
+  .su-about-phones .a{width:140px;left:6%;top:40px}.su-about-phones .b{width:155px;left:40%}
+  .su-fx{padding:24px 0 60px}
+  .su-fx-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  .su-fx .su-h2{font-size:34px}
+  .su-fx-intro{font-size:13.5px;margin:10px 0 18px}
+  .su-fx-list,.su-fx-stage{display:none}
+  .su-fx-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -24px 14px;padding:0 24px}
+  .su-fx-tabs::-webkit-scrollbar{display:none}
+  .su-fx-tab{flex:0 0 auto;border:1.5px solid var(--su-blue-line);background:#fff;border-radius:999px;padding:8px 14px;font:600 12.5px var(--su-text);color:var(--su-ink);cursor:pointer;white-space:nowrap}
+  .su-fx-tab.on{background:var(--su-ink);border-color:var(--su-ink);color:#fff}
+  .su-fx-panel{display:grid;grid-template-columns:132px 1fr;gap:16px;align-items:center;background:#fff;border-radius:20px;padding:14px;box-shadow:0 10px 30px rgba(40,90,140,.10);touch-action:pan-y}
+  .su-fx-panel .su-phone{border-width:2px;border-radius:20px;padding:3px;box-shadow:none}
+  .su-fx-panel .su-phone img{border-radius:16px}
+  .su-fx-panel .count{font-size:10px;font-weight:600;letter-spacing:1.4px;color:var(--su-muted)}
+  .su-fx-panel h3{font-family:var(--su-head);font-weight:700;text-transform:uppercase;font-size:20px;line-height:1.1;margin:4px 0 8px}
+  .su-fx-panel p{font-size:12.5px;line-height:1.5;margin:0;color:var(--su-body)}
+  .su-fx-panel .hint{display:block;margin-top:10px;font-size:10.5px;color:var(--su-blue);font-weight:600}
+  .su-fx-cta{margin-top:18px}
+  .su-fx-cta .su-btn{width:100%}
+  .su-fx-cta small{width:100%;text-align:center;margin-top:-6px}
+  .su-app{padding:60px 0 70px}
+  .su-app .su-head-row{align-items:center;text-align:center}
+  .su-app .su-intro{text-align:center}
+  .su-app-phones{justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 24px 20px;margin:0 -24px 28px}
+  .su-app-phones .su-phone{width:200px!important;margin-top:0!important;scroll-snap-align:center}
+  .su-pills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px;max-width:none}
+  .su-pill,.su-pill:nth-child(odd){display:flex;align-items:center;gap:10px;background:none;border:0;border-bottom:1px solid #E3EDF6;border-radius:0;padding:10px 0;font-size:12.5px;font-weight:500;line-height:1.25}
+  .su-pill i{flex:0 0 30px;height:30px;margin:0;border-radius:9px;background:var(--su-blue-soft);display:grid;place-items:center;font-size:14px}
+  .su-plans{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .su-ticks{flex-direction:column;align-items:flex-start;max-width:420px;margin:24px auto}
+  .su-featured--hero{margin:26px auto 0;padding-top:18px}
+  .su-featured--hero .logos{justify-content:center;gap:18px}
+  .su-featured--hero img{height:18px}.su-featured--hero .wf{height:20px}
+  .su-progs .su-head-row{align-items:center;text-align:center}
+  .su-prog-side{align-items:center}
+  .su-arrows{display:none}
+  .su-pcard{flex-basis:76%}
+  .su-oneoff-btn .su-btn{width:100%}
+  .su-compare{flex-direction:column;text-align:center}
+  .su-compare .su-btn{width:100%}
+  .su-results .su-head-row{align-items:center;text-align:center}
+  .su-story{grid-template-columns:1fr}
+  .su-story .ph{min-height:0;aspect-ratio:761/738}
+  .su-story .txt{padding:22px 20px 22px}
+  .su-story h3{font-size:26px;margin:8px 0 14px}
+  .su-story .stats b{font-size:22px}
+  .su-story blockquote{font-size:14.5px}
+  .su-tf-head{margin-top:34px}
+  .su-tf-head .su-arrows{display:none}
+  .su-tf{flex-basis:80%}
+  .su-reviews{grid-template-columns:1fr}
+  .su-gabby{padding:50px 0}
+  .su-gabby-grid{grid-template-columns:1fr}
+  .su-gabby-ph img{height:400px}
+  .su-faq-grid{grid-template-columns:1fr;gap:20px}
+  .su-faq-side{text-align:center}
+  .su-faq-side p{margin:12px auto 20px}
+  .su-lead-grid{grid-template-columns:1fr;gap:28px}
+  .su-foot-grid{grid-template-columns:1fr}
+  .su-bigmark img{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .su-strip-track{animation:none}
+  html{scroll-behavior:auto}
+  .su-btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="su-header">
+  <nav class="su-nav" aria-label="Main">
+    <a href="#top" class="su-logo"><img src="images/img-01.webp" alt="Shape Up"></a>
+    <ul>
+      <li><a href="#inside">What's Inside</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#programmes">Programmes</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="su-nav-right">
+      <a class="su-login" href="#">Login</a>
+      <a class="su-btn su-btn--yellow" href="#pricing">Start free trial</a>
+      <button class="su-burger" aria-label="Open menu" aria-expanded="false" id="suBurger"><span></span></button>
+    </div>
+  </nav>
+  <div class="su-mobile-menu" id="suMenu">
+    <a href="#inside">What's Inside</a><a href="#results">Results</a><a href="#pricing">Pricing</a><a href="#programmes">Programmes</a><a href="#faq">FAQ</a><a href="#">Login</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="su-hero" id="top">
+  <div class="su-wrap su-hero-grid">
+    <div>
+      <div class="su-rating">
+        <span class="su-avatars"><img src="images/img-02.webp" alt=""><img src="images/img-03.webp" alt=""><img src="images/img-04.webp" alt=""><img src="images/img-05.webp" alt=""></span>
+        <span class="su-stars" aria-hidden="true">★★★★★</span>
+        <span>48,000+ Reviews</span>
+      </div>
+      <h1>Your strongest<br>self starts here.</h1>
+      <p class="lead">Training, nutrition and 12,400 women who get it in one app that actually holds you to it. £24.99 a month. Your first 7 days are free.</p>
+      <div class="su-hero-ctas">
+        <a class="su-btn su-btn--blue" href="#pricing">Start free trial</a>
+        <a class="su-btn su-btn--outline" href="#inside">See what's inside <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="su-hero-note">7 days free • Cancel anytime</div>
+      <div class="su-featured su-featured--hero">
+        <p>As featured in</p>
+        <div class="logos"><img src="images/img-06.webp" alt="Women's Health"><img src="images/img-07.webp" alt="OK!"><img class="wf" src="images/img-08.webp" alt="Women's Fitness"><img src="images/img-09.webp" alt="Heat Fitness"></div>
+      </div>
+    </div>
+    <div class="su-hero-art">
+      <img class="su-hero-gabby" src="images/img-10.webp" alt="Gabby, founder of Shape Up">
+      <div class="su-phone su-hero-phone2"><img src="images/img-11.webp" alt="Shape Up meal plan screen"></div>
+      <div class="su-phone su-hero-phone1"><img src="images/img-12.webp" alt="Shape Up workout tracker screen"></div>
+    </div>
+  </div>
+  <div class="su-strip" aria-hidden="true">
+    <div class="su-strip-band">
+      <div class="su-strip-track">
+        <span><b>Zero</b> app crashes since launch</span><span class="spark">✦</span>
+        <span><b>1000+ 5</b> star reviews</span><span class="spark">✦</span>
+        <span><b>12,400</b> women training</span><span class="spark">✦</span>
+        <span><b>4K</b> workouts logged</span><span class="spark">✦</span>
+        <span><b>Zero</b> app crashes since launch</span><span class="spark">✦</span>
+        <span><b>1000+ 5</b> star reviews</span><span class="spark">✦</span>
+        <span><b>12,400</b> women training</span><span class="spark">✦</span>
+        <span><b>4K</b> workouts logged</span><span class="spark">✦</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT SHAPE UP IS ===== -->
+<section class="su-about">
+  <div class="su-wrap su-about-grid">
+    <div>
+      <p class="su-eyebrow">What Shape Up is</p>
+      <h2 class="su-h2"><b>Your health and</b><br><b>fitness</b> best friend</h2>
+      <p>One app that holds the whole thing together. Gabby writes the training, the nutrition sits in the same place you log it, and thousands of women are in there doing it alongside you.</p>
+      <p class="sub">No spreadsheets. No second tracking app. No starting again every January. You pick your days, your setup and your pace and everything refreshes monthly, so month twelve looks nothing like month one.</p>
+      <div class="su-facts">
+        <div><strong>20 min</strong><span>Shortest session</span></div>
+        <div><strong>3–5</strong><span>Days a week</span></div>
+        <div><strong>Gym + home</strong><span>Every plan</span></div>
+      </div>
+    </div>
+    <div class="su-about-phones">
+      <div class="su-phone a"><img src="images/img-13.webp" alt="Shape Up daily tasks screen"></div>
+      <div class="su-phone b"><img src="images/img-14.webp" alt="Shape Up home screen"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<svg class="su-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom:-1px"><path d="M0 70 C 300 0, 700 -10, 1000 30 S 1440 40, 1440 30 L1440 70 Z" fill="#EAF4FE"/></svg>
+<section class="su-fx" id="inside">
+  <div class="su-wrap su-fx-grid">
+    <div>
+      <p class="su-eyebrow">What's inside the membership</p>
+      <h2 class="su-h2">Everything.<strong>One price.</strong></h2>
+      <p class="su-fx-intro">Six things you get from day one. Nothing is locked behind a higher tier, because there isn't one.</p>
+      <!-- Desktop: accordion list -->
+      <ul class="su-fx-list" id="suFxList">
+        <li class="su-fx-item on" data-i="0"><button aria-expanded="true"><span class="ic" aria-hidden="true">💪</span>Training that progresses<span class="pl" aria-hidden="true">+</span></button><p>Structured gym and home plans, 3–5 days a week, with sets, reps and suggested weights based on what you actually lifted last week.</p></li>
+        <li class="su-fx-item" data-i="1"><button aria-expanded="false"><span class="ic" aria-hidden="true">🥗</span>Nutrition without the faff<span class="pl" aria-hidden="true">+</span></button><p>Barcode scanner, full UK food database, calorie and macro targets set for you. Nothing is banned and nothing gets weighed in shame.</p></li>
+        <li class="su-fx-item" data-i="2"><button aria-expanded="false"><span class="ic" aria-hidden="true">👯‍♀️</span>A community that shows up<span class="pl" aria-hidden="true">+</span></button><p>A private group of women training the same plans. Ask anything, someone has already been exactly where you are today.</p></li>
+        <li class="su-fx-item" data-i="3"><button aria-expanded="false"><span class="ic" aria-hidden="true">🎥</span>Classes for every kind of week<span class="pl" aria-hidden="true">+</span></button><p>Strength, glutes, HIIT, low impact, pilates and core from 20 minutes up, on demand, with a weekly live from Gabby.</p></li>
+        <li class="su-fx-item" data-i="4"><button aria-expanded="false"><span class="ic" aria-hidden="true">🩷</span>Habit &amp; period tracking<span class="pl" aria-hidden="true">+</span></button><p>Train with your cycle, not against it. Water, steps, sleep and protein in one dashboard, with streaks that don't punish a missed day.</p></li>
+        <li class="su-fx-item" data-i="5"><button aria-expanded="false"><span class="ic" aria-hidden="true">✨</span>New content every month<span class="pl" aria-hidden="true">+</span></button><p>Fresh plans, classes and challenges added monthly at no extra cost, so month twelve looks nothing like month one.</p></li>
+      </ul>
+      <!-- Mobile: tabs + compact panel -->
+      <div class="su-fx-tabs" role="tablist" id="suFxTabs"><button class="su-fx-tab on" data-i="0" role="tab" aria-selected="true"><span aria-hidden="true">💪</span> Training</button><button class="su-fx-tab" data-i="1" role="tab" aria-selected="false"><span aria-hidden="true">🥗</span> Nutrition</button><button class="su-fx-tab" data-i="2" role="tab" aria-selected="false"><span aria-hidden="true">👯‍♀️</span> Community</button><button class="su-fx-tab" data-i="3" role="tab" aria-selected="false"><span aria-hidden="true">🎥</span> Classes</button><button class="su-fx-tab" data-i="4" role="tab" aria-selected="false"><span aria-hidden="true">🩷</span> Habits &amp; cycle</button><button class="su-fx-tab" data-i="5" role="tab" aria-selected="false"><span aria-hidden="true">✨</span> New content</button></div>
+      <div class="su-fx-panel" id="suFxPanel">
+        <div class="su-phone"><img id="suFxImgM" src="images/img-15.webp" alt="Shape Up app screen"></div>
+        <div class="txt">
+          <span class="count" id="suFxCount">1 / 6</span>
+          <h3 id="suFxTitle">Training that progresses</h3>
+          <p id="suFxText">Structured gym and home plans, 3–5 days a week, with sets, reps and suggested weights based on what you actually lifted last week.</p>
+          <span class="hint">Swipe for more</span>
+        </div>
+      </div>
+      <div class="su-fx-cta"><a class="su-btn su-btn--blue" href="#pricing">Start free trial</a><small>7 days free, then £24.99 a month</small></div>
+    </div>
+    <div class="su-fx-stage">
+      <div class="su-fx-chip c1"><span aria-hidden="true">⭐</span>48,000+ reviews</div>
+      <div class="su-phone"><img id="suFxImg" src="images/img-15.webp" alt="Shape Up app screen"></div>
+      <div class="su-fx-chip c2"><span aria-hidden="true">👯‍♀️</span>12,400 women training</div>
+    </div>
+  </div>
+</section>
+<script>window.SU_FX_IMGS=['images/img-15.webp','images/img-16.webp','images/img-14.webp','images/img-12.webp','images/img-13.webp','images/img-17.webp'];</script>
+
+<!-- ===== INSIDE THE APP ===== -->
+<section class="su-app">
+  <div class="su-wrap">
+    <div class="su-head-row">
+      <div>
+        <p class="su-eyebrow">Inside the app</p>
+        <h2 class="su-h2">Everything you need,<strong>right there in your pocket.</strong></h2>
+      </div>
+      <p class="su-intro">This is the first full programme built inside the new app, and honestly that's the bit I'm most excited about.</p>
+    </div>
+    <div class="su-app-phones">
+      <div class="su-phone"><img src="images/img-16.webp" alt="Meal plan screen"></div>
+      <div class="su-phone"><img src="images/img-13.webp" alt="Daily tasks and habit tracking screen"></div>
+      <div class="su-phone"><img src="images/img-14.webp" alt="Home screen"></div>
+      <div class="su-phone"><img src="images/img-15.webp" alt="Workout logging screen"></div>
+      <div class="su-phone"><img src="images/img-17.webp" alt="New habit screen"></div>
+    </div>
+    <div class="su-pills">
+      <span class="su-pill"><i aria-hidden="true">💪</i>Workout Logger</span><span class="su-pill"><i aria-hidden="true">🥗</i>Meal Plan System</span><span class="su-pill"><i aria-hidden="true">📷</i>Food Logger &amp; Scanner</span><span class="su-pill"><i aria-hidden="true">❤️</i>Apple &amp; Google Health</span>
+      <span class="su-pill"><i aria-hidden="true">🎯</i>Goal Setting</span><span class="su-pill"><i aria-hidden="true">📊</i>Workout PRs &amp; History</span><span class="su-pill"><i aria-hidden="true">📸</i>Progress Photos</span><span class="su-pill"><i aria-hidden="true">💧</i>Habit Tracking</span><span class="su-pill"><i aria-hidden="true">✅</i>Task System</span>
+      <span class="su-pill"><i aria-hidden="true">📋</i>Check-In System</span><span class="su-pill"><i aria-hidden="true">👱‍♀️</i>Period Tracker</span><span class="su-pill"><i aria-hidden="true">🍴</i>Recipes &amp; Favourites</span><span class="su-pill"><i aria-hidden="true">🩹</i>Injury System</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<svg class="su-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom:-1px"><path d="M0 70 C 400 -10, 1040 -10, 1440 70 Z" fill="#FFF7DD"/></svg>
+<section class="su-pricing" id="pricing">
+  <div class="su-wrap">
+    <p class="su-eyebrow">Membership</p>
+    <h2 class="su-h2">If you're waiting<br>for a sign, <strong>this is it</strong></h2>
+    <p class="lede">Same everything on every plan. The longer you commit, the less you pay and the first 7 days are free whichever you choose.</p>
+    <div class="su-plans">
+      <article class="su-plan">
+        <div class="ph"><img src="images/img-18.webp" alt=""></div>
+        <div class="bd">
+          <span class="term">Monthly</span>
+          <div class="price"><b>£24.99</b><span>per month, rolling</span></div>
+          <span class="day">82p a day</span>
+          <a class="su-btn su-btn--ghost" href="#">Start free trial</a>
+          <p class="desc">Six weeks, gym and home options, food plan, all in the app.</p>
+        </div>
+      </article>
+      <article class="su-plan su-plan--pop">
+        <span class="badge">Most popular</span>
+        <div class="ph"><img src="images/img-19.webp" alt="" style="object-position:center 20%"></div>
+        <div class="bd">
+          <span class="term">Quarterly</span>
+          <div class="price"><b>£64.99</b><span>every 3 months · save 13%</span></div>
+          <span class="day">71p a day</span>
+          <a class="su-btn su-btn--ghost" href="#">Start free trial</a>
+          <p class="desc">Six weeks, gym and home options, food plan, all in the app.</p>
+        </div>
+      </article>
+      <article class="su-plan">
+        <div class="ph"><img src="images/img-18.webp" alt=""></div>
+        <div class="bd">
+          <span class="term">Annual</span>
+          <div class="price"><b>£199</b><span>per year · save 34%</span></div>
+          <span class="day">55p a day</span>
+          <a class="su-btn su-btn--ghost" href="#">Start free trial</a>
+          <p class="desc">Six weeks, gym and home options, food plan, all in the app.</p>
+        </div>
+      </article>
+    </div>
+    <ul class="su-ticks">
+      <li>7 days free on every plan</li><li>Cancel in two taps, no email or phone call</li><li>iOS &amp; Android</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== PROGRAMMES (included in membership) ===== -->
+<section class="su-progs" id="programmes">
+  <div class="su-wrap">
+    <div class="su-head-row">
+      <div>
+        <p class="su-eyebrow">Included in the membership</p>
+        <h2 class="su-h2">Every programme<strong>included</strong></h2>
+      </div>
+      <div class="su-prog-side">
+        <p class="su-intro">Every programme Gabby writes is in the app from day one, plus every new one as it lands. No extra cost, nothing to unlock.</p>
+        <div class="su-arrows">
+          <button class="su-arrow" data-dir="-1" aria-label="Previous programmes">‹</button>
+          <button class="su-arrow" data-dir="1" aria-label="Next programmes">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="su-prog-track" id="suProgTrack" tabindex="0" aria-label="Programmes included in the membership">
+    <article class="su-pcard">
+      <div class="ph"><img src="images/img-20.webp" alt="Shape Up members on a group trip"><span class="su-tag">New programme!</span></div>
+      <p class="su-meta">10 weeks · gym + home</p>
+      <h3>Hot Girl Summer</h3>
+      <p>Progressive training plus flexible nutrition, so you can actually enjoy the summer you're training for.</p>
+    </article>
+    <article class="su-pcard">
+      <div class="ph"><img src="images/img-21.webp" alt="Gabby in the gym with a barbell"><span class="su-tag">New programme!</span></div>
+      <p class="su-meta">28 days · 4 days a week</p>
+      <h3>Shred in 28</h3>
+      <p>Four weeks to tighten up, lean out and feel stronger, structured so every session builds on the last.</p>
+    </article>
+    <article class="su-pcard">
+      <div class="ph"><img src="images/img-22.webp" alt="Gabby carrying a weighted pack" style="object-position:40% center"><span class="su-tag">New programme!</span></div>
+      <p class="su-meta">8 weeks · 4 day split</p>
+      <h3>SAS: Strength &amp; Sustain</h3>
+      <p>Heavy compound lifts and conditioning circuits, built to make strength a habit rather than a phase.</p>
+    </article>
+    <article class="su-pcard">
+      <div class="ph"><img src="images/img-23.webp" alt="Gabby holding dumbbells" style="object-position:center 20%"><span class="su-tag">New programme!</span></div>
+      <p class="su-meta">8 weeks · 4 day split</p>
+      <h3>Glute Programme</h3>
+      <p>Heavy compound lifts and conditioning circuits, built to make strength a habit rather than a phase.</p>
+    </article>
+    <article class="su-pcard su-pcard--video">
+      <div class="ph"><img src="images/img-24.webp" alt="Gabby lifting a dumbbell" style="object-position:60% 30%"><button class="play" aria-label="Play video">▶</button></div>
+      <p class="su-meta">Gym, home, classes</p>
+      <h3>Every style included</h3>
+      <p>Strength, glutes, HIIT, low impact, pilates and core. Pick the plan that suits your week and switch whenever you like.</p>
+    </article>
+  </div>
+  <div class="su-wrap">
+    <div class="su-oneoff-btn"><a class="su-btn su-btn--outline" href="#">Buy a one off programme</a></div>
+    <div class="su-compare">
+      <p>All of these, plus every new programme we add, for <b>£24.99</b> a month. Your first 7 days are free.</p>
+      <a class="su-btn su-btn--yellow" href="#pricing">Start free trial</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section class="su-results" id="results">
+  <div class="su-wrap">
+    <div class="su-head-row">
+      <div>
+        <p class="su-eyebrow">Results</p>
+        <h2 class="su-h2">Real women,<strong>real results</strong></h2>
+      </div>
+      <p class="su-intro" style="max-width:270px">Women supporting women, and it shows. Every woman here trained the same plans you'd start on Monday. Different bodies, different starting points, same app.</p>
+    </div>
+    <article class="su-story">
+      <div class="ph"><img src="images/img-25.webp" alt="Beth's before and after, side view, four weeks apart"><span class="lbl b">Before</span><span class="lbl a">After</span></div>
+      <div class="txt">
+        <span class="stars" aria-label="5 stars">★★★★★</span>
+        <h3>Beth, 4 weeks in</h3>
+        <div class="stats">
+          <div><b>1.5kg</b><span>down</span></div>
+          <div><b>4.5cm</b><span>off her waist</span></div>
+          <div><b>4</b><span>weeks of hard work</span></div>
+        </div>
+        <blockquote>“My mindset again is feeling good and positive about the gym and I've really enjoyed the set of exercises as I feel they've allowed me to push myself.”</blockquote>
+        <p class="extra">“This group really have made things much easier to stick to and push through all the challenges that crop up!”</p>
+        <cite>Beth · Shape Up member</cite>
+      </div>
+    </article>
+  </div>
+  <div class="su-wrap su-tf-head">
+    <h3 class="su-videos-h">More member transformations</h3>
+    <div class="su-arrows">
+      <button class="su-arrow su-tf-arrow" data-dir="-1" aria-label="Previous transformations">‹</button>
+      <button class="su-arrow su-tf-arrow" data-dir="1" aria-label="Next transformations">›</button>
+    </div>
+  </div>
+  <div class="su-tf-track" id="suTfTrack" tabindex="0" aria-label="Member before and after photos">
+    <figure class="su-tf"><img src="images/img-26.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-27.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-28.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-29.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-30.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-31.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-32.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-33.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-34.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-35.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-36.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-37.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-38.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+    <figure class="su-tf"><img src="images/img-39.webp" alt="Shape Up member before and after" loading="lazy"><span class="lbl b">Before</span><span class="lbl a">After</span></figure>
+  </div>
+  <div class="su-wrap">
+    <div class="su-reviews">
+      <figure class="su-review" style="margin:0"><span class="stars">★★★★★</span><blockquote>“The strongest I've ever been, the healthiest I've ever been and the most confident I've ever been. I don't dread Mondays now.”</blockquote><cite>Emily R · member 14 months</cite></figure>
+      <figure class="su-review" style="margin:0"><span class="stars">★★★★★</span><blockquote>“The strongest I've ever been, the healthiest I've ever been and the most confident I've ever been. I don't dread Mondays now.”</blockquote><cite>Emily R · member 14 months</cite></figure>
+      <figure class="su-review" style="margin:0"><span class="stars">★★★★★</span><blockquote>“Total beginner, terrified of the weights section. Six weeks in I was squatting with a barbell. The demo videos did that.”</blockquote><cite>Jodie M · member 6 months</cite></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEET GABBY ===== -->
+<section class="su-gabby">
+  <div class="su-wrap su-gabby-grid">
+    <div class="su-gabby-ph">
+      <img src="images/img-40.webp" alt="Gabby, Level 3 personal trainer and nutrition coach">
+      <div class="note">Level 3 PT &amp; nutrition coach, coaching women for 6 years</div>
+    </div>
+    <div>
+      <p class="su-eyebrow">Meet Gabby</p>
+      <h2 class="su-h2">I built this for<strong>women like me</strong></h2>
+      <p>I spent years training the way the internet told me to, hating it, and starting again every January. What changed it was a plan that progressed, food I didn't have to think about twice, and women around me who got it.</p>
+      <p>Shape Up is that, in an app. I write every plan, I'm in the community every day, and I go live every week. No shame, no punishing yourself for a weekend. Just training that adds up.</p>
+      <div class="su-creds">
+        <div><span class="ic" aria-hidden="true">🏆</span><b>Top</b><span>Qualified personal trainer &amp; nutrition coach</span></div>
+        <div><span class="ic" aria-hidden="true">✨</span><b>6 yrs</b><span>Coaching women in person and online</span></div>
+        <div><span class="ic" aria-hidden="true">👥</span><b>12,400</b><span>Women trained through Shape Up</span></div>
+      </div>
+      <a class="su-insta" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="su-faq" id="faq">
+  <div class="su-wrap su-faq-grid">
+    <div class="su-faq-side">
+      <p class="su-eyebrow">FAQ</p>
+      <h2 class="su-h2">Everything<strong>you'd ask</strong></h2>
+      <p>Still unsure? Email <a href="mailto:hello@shapeupwithgabby.co.uk">hello@shapeupwithgabby.co.uk</a> and you'll hear back within a day.</p>
+      <a class="su-btn su-btn--yellow" href="#pricing">Start free trial</a>
+      <small>7 days free, then £24.99 a month.</small>
+    </div>
+    <div>
+      <details open><summary><span class="n">01</span>What exactly do I get for £24.99 a month?<span class="t">+</span></summary><p>Everything: all gym and home training plans, every class, nutrition guidance and meal ideas, the barcode scanner, calorie and macro tracking, habit and period trackers, the private community and the weekly live with Gabby. New content is added every month at no extra cost, and there is no higher tier to upgrade to.</p></details>
+      <details><summary><span class="n">02</span>How does the 7 day free trial work?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Pick any plan and your first 7 days are free. Cancel in the app before the trial ends and you won't be charged.</p></details>
+      <details><summary><span class="n">03</span>Can I cancel whenever I want?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. You can cancel in two taps inside the app, with no email or phone call needed.</p></details>
+      <details><summary><span class="n">04</span>I'm a complete beginner. Is this for me?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. Every exercise has a demo video, sessions start from 20 minutes, and your suggested weights are based on what you actually lifted last week.</p></details>
+      <details><summary><span class="n">05</span>Do I need a gym membership?<span class="t">+</span></summary><p>[DRAFT, confirm with client] No. Every plan comes with gym and home options, so you can train wherever suits you.</p></details>
+      <details><summary><span class="n">06</span>How much time do I need each week?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Plans run 3 to 5 days a week, with sessions from 20 minutes.</p></details>
+      <details><summary><span class="n">07</span>Membership or a one off programme, which should I pick?<span class="t">+</span></summary><p>[DRAFT, confirm with client] A one off programme is yours forever with no subscription. The membership includes every programme plus new content each month, and works out cheaper from month one.</p></details>
+      <details><summary><span class="n">08</span>Do I still need a separate food tracking app?<span class="t">+</span></summary><p>[DRAFT, confirm with client] No. The barcode scanner, full UK food database and calorie and macro tracking are all built into Shape Up.</p></details>
+      <details><summary><span class="n">09</span>Will the plans work around my cycle?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. The period tracker sits alongside your training so you can train with your cycle, not against it.</p></details>
+      <details><summary><span class="n">10</span>What if I get stuck or need help?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Ask in the private community, join Gabby's weekly live, or email hello@shapeupwithgabby.co.uk and you'll hear back within a day.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEAD MAGNET ===== -->
+<svg class="su-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="margin-bottom:-1px"><path d="M0 40 C 300 -5, 700 0, 1050 45 S 1440 20, 1440 20 L1440 70 L0 70 Z" fill="#62BAF5"/></svg>
+<section class="su-lead">
+  <div class="su-wrap su-lead-grid">
+    <div>
+      <p class="su-eyebrow">Not ready to join yet?</p>
+      <h2 class="su-h2">Take the free<strong>starter guide</strong></h2>
+      <p>Gabby's 5 day starter plan plus a week of high protein meals, straight to your inbox. No spam, unsubscribe in one click.</p>
+    </div>
+    <form class="su-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Check your inbox';">
+      <label for="suEmail">Your email</label>
+      <input id="suEmail" type="email" placeholder="you@email.com" required>
+      <button class="su-btn su-btn--yellow" type="submit">Send me the guide</button>
+      <small>We'll never share your email. Unsubscribe in one click.</small>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<svg class="su-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="background:#62BAF5;margin-bottom:-1px"><path d="M0 40 C 400 0, 900 10, 1440 30 L1440 70 L0 70 Z" fill="#FDE08D"/></svg>
+<footer class="su-footer">
+  <div class="su-wrap">
+    <div class="su-foot-grid">
+      <div>
+        <img src="images/img-01.webp" alt="Shape Up" style="height:26px;width:auto">
+        <p>Training, nutrition and a community of women, all in one app. Written and coached in the UK by Gabby.</p>
+        <div class="su-stores"><a href="#"><img src="images/img-41.webp" alt="Download on the App Store"></a><a href="#"><img src="images/img-42.webp" alt="Get it on Google Play"></a></div>
+      </div>
+      <div><h4>Membership</h4><ul><li><a href="#pricing">Pricing</a></li><li><a href="#inside">What's inside</a></li><li><a href="#inside">Inside the app</a></li><li><a href="#">Member login</a></li></ul></div>
+      <div><h4>Programmes</h4><ul><li><a href="#programmes">Hot Girl Summer</a></li><li><a href="#programmes">Shred in 28</a></li><li><a href="#programmes">SAS: Strength &amp; Sustain</a></li><li><a href="#programmes">8 Week Glute Programme</a></li></ul></div>
+      <div><h4>Help &amp; social</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@shapeupwithgabby.co.uk">Contact</a></li><li><a href="#results">Results</a></li><li><a href="#">Instagram</a></li></ul></div>
+    </div>
+    <div class="su-bigmark"><img src="images/img-01.webp" alt=""></div>
+    <div class="su-legal">
+      <span>© 2026 Shape Up with Gabby. All rights reserved.</span>
+      <nav><a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><a href="#">Cookies</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b=document.getElementById('suBurger'),m=document.getElementById('suMenu');
+  b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.setAttribute('aria-expanded','false')})});
+  var tr=document.getElementById('suProgTrack'),arr=document.querySelectorAll('.su-arrow');
+  function upd(){arr[0].disabled=tr.scrollLeft<5;arr[1].disabled=tr.scrollLeft+tr.clientWidth>=tr.scrollWidth-5}
+  arr.forEach(function(a){a.addEventListener('click',function(){var c=tr.querySelector('.su-pcard');tr.scrollBy({left:(c.offsetWidth+20)*a.dataset.dir})})});
+  tr.addEventListener('scroll',upd);window.addEventListener('resize',upd);upd();
+  // What's inside: desktop accordion + mobile tabs/swipe share one state
+  var fxItems=document.querySelectorAll('#suFxList .su-fx-item'),fxTabs=document.querySelectorAll('#suFxTabs .su-fx-tab'),
+      fxImg=document.getElementById('suFxImg'),fxImgM=document.getElementById('suFxImgM'),
+      fxT=document.getElementById('suFxTitle'),fxP=document.getElementById('suFxText'),fxC=document.getElementById('suFxCount'),cur=0;
+  function fxSet(i){
+    cur=(i+6)%6;
+    fxItems.forEach(function(li,k){li.classList.toggle('on',k===cur);li.querySelector('button').setAttribute('aria-expanded',k===cur)});
+    fxTabs.forEach(function(b,k){b.classList.toggle('on',k===cur);b.setAttribute('aria-selected',k===cur)});
+    fxTabs[cur].scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+    var li=fxItems[cur];
+    fxT.innerHTML=li.querySelector('button').childNodes[1].textContent;
+    fxP.textContent=li.querySelector('p').textContent;
+    fxC.textContent=(cur+1)+' / 6';
+    [fxImg,fxImgM].forEach(function(im){im.style.opacity=0;setTimeout(function(){im.src=window.SU_FX_IMGS[cur];im.style.opacity=1},160)});
+  }
+  fxItems.forEach(function(li,k){li.querySelector('button').addEventListener('click',function(){fxSet(k)})});
+  fxTabs.forEach(function(b,k){b.addEventListener('click',function(){fxSet(k)})});
+  var panel=document.getElementById('suFxPanel'),sx=null;
+  panel.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  panel.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)fxSet(cur+(dx<0?1:-1));sx=null});
+  var tf=document.getElementById('suTfTrack'),ta=document.querySelectorAll('.su-tf-arrow');
+  function tfu(){ta[0].disabled=tf.scrollLeft<5;ta[1].disabled=tf.scrollLeft+tf.clientWidth>=tf.scrollWidth-5}
+  ta.forEach(function(a){a.addEventListener('click',function(){tf.scrollBy({left:(tf.querySelector('.su-tf').offsetWidth+14)*a.dataset.dir})})});
+  tf.addEventListener('scroll',tfu);window.addEventListener('resize',tfu);tfu();
+})();
+</script>
+</body>
+</html>
