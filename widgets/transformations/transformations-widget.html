@@ -1,0 +1,362 @@
+<!--
+  SHAPE UP TRANSFORMATIONS CAROUSEL + MEMBERSHIP CHECKOUT (v3)
+  Drop-in widget for Elementor > Custom HTML widget.
+
+  SETUP (for Sam):
+  1. Upload the 10 images (transformation-01.jpg to transformation-10.jpg) to the
+     WordPress Media Library (Media > Add New, upload all at once).
+  2. Copy each image's Media Library URL into the `images` array in the script
+     below, replacing the placeholder file names. Reorder as you like.
+  3. Membership links and the login link are already in the `plans` array and
+     `loginUrl` in the script. Edit prices or labels there if they change.
+
+  Everything is self-contained, no external CSS or JS.
+
+  BRAND NOTES (from the live site and Gabby's email copy):
+  - Headlines: bold, ALL CAPS, punchy, fire emoji energy
+  - CTA buttons: short, ALL CAPS, direct
+  - Body copy: casual, first person, exclamation marks, no em dashes
+  - Accent colour (--sut-accent) is a hot coral pink. Swap the hex if it clashes
+    with the live theme colour.
+-->
+
+<style>
+  .sut-carousel-wrap {
+    --sut-accent: #ff3b5c;
+    --sut-dark: #111111;
+    --sut-light-bg: #f7f2f1;
+    --sut-radius: 18px;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 32px 16px 40px;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+  .sut-carousel-wrap * { box-sizing: border-box; }
+
+  .sut-heading { text-align: center; margin: 0 0 22px; }
+  .sut-heading h2 {
+    font-size: 27px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--sut-dark);
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+  .sut-heading h2 .sut-accent-word { color: var(--sut-accent); }
+  .sut-heading p {
+    font-size: 15.5px;
+    color: #444;
+    margin: 0;
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .sut-stage {
+    position: relative;
+    border-radius: var(--sut-radius);
+    overflow: hidden;
+    background: var(--sut-light-bg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  }
+  .sut-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(.22,.61,.36,1);
+    touch-action: pan-y;
+  }
+  .sut-slide { flex: 0 0 100%; width: 100%; }
+  .sut-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1.05;
+    object-fit: cover;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  .sut-caption {
+    padding: 12px 18px 16px;
+    text-align: center;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--sut-dark);
+    background: #fff;
+  }
+  .sut-caption:empty { display: none; }
+
+  .sut-arrow {
+    position: absolute;
+    top: 44%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    z-index: 3;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .sut-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+  .sut-arrow svg { width: 18px; height: 18px; fill: none; stroke: var(--sut-dark); stroke-width: 2.6; }
+  .sut-arrow-prev { left: 12px; }
+  .sut-arrow-next { right: 12px; }
+  @media (max-width: 480px) { .sut-arrow { width: 34px; height: 34px; } }
+
+  .sut-dots { display: flex; justify-content: center; gap: 7px; margin-top: 16px; }
+  .sut-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ddd2cf;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .sut-dot.is-active { background: var(--sut-accent); transform: scale(1.35); }
+
+  .sut-counter {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(17,17,17,0.68);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    z-index: 3;
+    letter-spacing: 0.3px;
+  }
+  .sut-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--sut-accent);
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    z-index: 3;
+  }
+
+  .sut-cta-btn {
+    display: inline-block;
+    background: var(--sut-accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    padding: 15px 32px;
+    border-radius: 999px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .sut-cta-btn:hover { transform: translateY(-1px); opacity: 0.92; color: #fff; }
+
+  /* Membership checkout */
+  .sut-checkout { margin-top: 32px; text-align: center; }
+  .sut-checkout h3 {
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--sut-dark);
+    margin: 0 0 6px;
+    line-height: 1.15;
+  }
+  .sut-checkout > p { font-size: 14.5px; color: #444; margin: 0 0 18px; font-weight: 500; }
+  .sut-plan {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: left;
+    background: #fff;
+    border: 2px solid #eadfdc;
+    border-radius: 16px;
+    padding: 14px 14px 14px 18px;
+    margin-bottom: 14px;
+  }
+  .sut-plan.is-featured {
+    border-color: var(--sut-accent);
+    box-shadow: 0 6px 18px rgba(255,59,92,0.14);
+  }
+  .sut-plan-badge {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--sut-accent);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .sut-plan-name { font-size: 15px; font-weight: 800; text-transform: uppercase; color: var(--sut-dark); }
+  .sut-plan-price { font-size: 13.5px; color: #555; font-weight: 600; margin-top: 2px; }
+  .sut-plan-price:empty { display: none; }
+  .sut-plan .sut-cta-btn { padding: 12px 20px; font-size: 13.5px; white-space: nowrap; }
+  .sut-login { margin-top: 16px; font-size: 14px; color: #444; font-weight: 500; }
+  .sut-login a { color: var(--sut-accent); font-weight: 800; text-decoration: none; }
+  .sut-login a:hover { text-decoration: underline; }
+</style>
+
+<div class="sut-carousel-wrap">
+
+  <div class="sut-heading">
+    <h2>real results. real <span class="sut-accent-word">shape up girls</span> 🔥</h2>
+    <p>no filters, no BS. just what happens when you actually show up for yourself!!</p>
+  </div>
+
+  <div class="sut-stage" id="sutStage">
+    <div class="sut-tag">before / after</div>
+    <div class="sut-counter"><span id="sutCounterCurrent">1</span>/<span id="sutCounterTotal">10</span></div>
+
+    <button class="sut-arrow sut-arrow-prev" id="sutPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="sut-arrow sut-arrow-next" id="sutNext" aria-label="Next">
+      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <div class="sut-track" id="sutTrack"></div>
+    <div class="sut-caption" id="sutCaption"></div>
+  </div>
+
+  <div class="sut-dots" id="sutDots"></div>
+
+  <div class="sut-checkout">
+    <h3>choose your membership 🔥</h3>
+    <p>programmes, classes, community and me, all in one place!!</p>
+    <div id="sutPlans"></div>
+    <div class="sut-login">already a member? <a href="#" id="sutLogin">log in here</a></div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  // EDIT THIS: replace each src with the real Media Library URL once uploaded.
+  // Caption is optional, leave as "" for none.
+  var images = [
+    { src: "transformation-01.jpg", caption: "" },
+    { src: "transformation-02.jpg", caption: "" },
+    { src: "transformation-03.jpg", caption: "" },
+    { src: "transformation-04.jpg", caption: "" },
+    { src: "transformation-05.jpg", caption: "" },
+    { src: "transformation-06.jpg", caption: "" },
+    { src: "transformation-07.jpg", caption: "" },
+    { src: "transformation-08.jpg", caption: "" },
+    { src: "transformation-09.jpg", caption: "" },
+    { src: "transformation-10.jpg", caption: "" }
+  ];
+
+  // MEMBERSHIP CHECKOUT LINKS. Leave price as "" to hide it on the card.
+  var plans = [
+    { name: "Monthly", price: "£24.99 / month", btn: "join monthly", featured: false,
+      url: "https://join.shapeupwithgabby.co.uk/p/shape-up-membership/monthly" },
+    { name: "Every 3 months", price: "", btn: "join 3 months", featured: false,
+      url: "https://join.shapeupwithgabby.co.uk/p/shape-up-membership/3-month" },
+    { name: "Annual", price: "£199 / year", btn: "join annual", featured: true, badge: "best value",
+      url: "https://join.shapeupwithgabby.co.uk/p/shape-up-membership/yearly" }
+  ];
+  var loginUrl = "https://join.shapeupwithgabby.co.uk/auth/login";
+
+  var track = document.getElementById("sutTrack");
+  var dotsWrap = document.getElementById("sutDots");
+  var caption = document.getElementById("sutCaption");
+  var counterCurrent = document.getElementById("sutCounterCurrent");
+  var counterTotal = document.getElementById("sutCounterTotal");
+  var plansWrap = document.getElementById("sutPlans");
+
+  plans.forEach(function (p) {
+    var card = document.createElement("div");
+    card.className = "sut-plan" + (p.featured ? " is-featured" : "");
+    var badge = p.badge ? '<div class="sut-plan-badge">' + p.badge + '</div>' : "";
+    card.innerHTML = badge +
+      '<div><div class="sut-plan-name">' + p.name + '</div><div class="sut-plan-price">' + p.price + '</div></div>' +
+      '<a class="sut-cta-btn" href="' + p.url + '">' + p.btn + '</a>';
+    plansWrap.appendChild(card);
+  });
+  document.getElementById("sutLogin").setAttribute("href", loginUrl);
+
+  var current = 0;
+
+  images.forEach(function (img, i) {
+    var slide = document.createElement("div");
+    slide.className = "sut-slide";
+    var el = document.createElement("img");
+    el.src = img.src;
+    el.alt = "Shape Up with Gabby transformation " + (i + 1);
+    el.loading = i === 0 ? "eager" : "lazy";
+    slide.appendChild(el);
+    track.appendChild(slide);
+
+    var dot = document.createElement("button");
+    dot.className = "sut-dot" + (i === 0 ? " is-active" : "");
+    dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+    dot.addEventListener("click", function () { goTo(i); });
+    dotsWrap.appendChild(dot);
+  });
+
+  counterTotal.textContent = images.length;
+
+  function update() {
+    track.style.transform = "translateX(-" + (current * 100) + "%)";
+    counterCurrent.textContent = current + 1;
+    caption.textContent = images[current].caption || "";
+    var dots = dotsWrap.querySelectorAll(".sut-dot");
+    dots.forEach(function (d, i) { d.classList.toggle("is-active", i === current); });
+  }
+
+  function goTo(i) {
+    current = (i + images.length) % images.length;
+    update();
+  }
+
+  document.getElementById("sutPrev").addEventListener("click", function () { goTo(current - 1); });
+  document.getElementById("sutNext").addEventListener("click", function () { goTo(current + 1); });
+
+  var startX = 0, deltaX = 0, dragging = false;
+  var stage = document.getElementById("sutStage");
+
+  stage.addEventListener("touchstart", function (e) {
+    startX = e.touches[0].clientX;
+    dragging = true;
+    track.style.transition = "none";
+  }, { passive: true });
+
+  stage.addEventListener("touchmove", function (e) {
+    if (!dragging) return;
+    deltaX = e.touches[0].clientX - startX;
+    var pct = (deltaX / stage.offsetWidth) * 100;
+    track.style.transform = "translateX(" + (-(current * 100) + pct) + "%)";
+  }, { passive: true });
+
+  stage.addEventListener("touchend", function () {
+    dragging = false;
+    track.style.transition = "";
+    if (Math.abs(deltaX) > stage.offsetWidth * 0.18) {
+      goTo(current + (deltaX < 0 ? 1 : -1));
+    } else {
+      update();
+    }
+    deltaX = 0;
+  });
+
+  update();
+})();
+</script>
