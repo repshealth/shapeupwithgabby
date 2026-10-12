@@ -635,7 +635,7 @@ a{color:inherit}
     </article>
   </div>
   <div class="su-wrap">
-    <div class="su-oneoff-btn"><a class="su-btn su-btn--outline" href="#">Buy a one off programme</a></div>
+    <div class="su-oneoff-btn"><a class="su-btn su-btn--outline" href="programmes.html">Buy a one off programme</a></div>
     <div class="su-compare">
       <p>All of these, plus every new programme we add, for <b>£24.99</b> a month. Your first 7 days are free.</p>
       <a class="su-btn su-btn--yellow" href="#pricing">Start free trial</a>
@@ -719,7 +719,7 @@ a{color:inherit}
         <div><span class="ic" aria-hidden="true">✨</span><b>6 yrs</b><span>Coaching women in person and online</span></div>
         <div><span class="ic" aria-hidden="true">👥</span><b>12,400</b><span>Women trained through Shape Up</span></div>
       </div>
-      <a class="su-insta" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Instagram</a>
+      <a class="su-insta" href="https://www.instagram.com/gabbydawnallen/?hl=en" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Instagram</a>
     </div>
   </div>
 </section>
@@ -779,7 +779,7 @@ a{color:inherit}
       </div>
       <div><h4>Membership</h4><ul><li><a href="#pricing">Pricing</a></li><li><a href="#inside">What's inside</a></li><li><a href="#inside">Inside the app</a></li><li><a href="https://join.shapeupwithgabby.co.uk/auth/login">Member login</a></li></ul></div>
       <div><h4>Programmes</h4><ul><li><a href="#programmes">Hot Girl Summer</a></li><li><a href="#programmes">Shred in 28</a></li><li><a href="#programmes">SAS: Strength &amp; Sustain</a></li><li><a href="#programmes">8 Week Glute Programme</a></li></ul></div>
-      <div><h4>Help &amp; social</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@shapeupwithgabby.co.uk">Contact</a></li><li><a href="#results">Results</a></li><li><a href="#">Instagram</a></li></ul></div>
+      <div><h4>Help &amp; social</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@shapeupwithgabby.co.uk">Contact</a></li><li><a href="#results">Results</a></li><li><a href="https://www.instagram.com/gabbydawnallen/?hl=en" target="_blank" rel="noopener">Instagram</a></li></ul></div>
     </div>
     <div class="su-bigmark"><img src="images/img-01.webp" alt=""></div>
     <div class="su-legal">
@@ -822,6 +822,13 @@ a{color:inherit}
   function tfu(){ta[0].disabled=tf.scrollLeft<5;ta[1].disabled=tf.scrollLeft+tf.clientWidth>=tf.scrollWidth-5}
   ta.forEach(function(a){a.addEventListener('click',function(){tf.scrollBy({left:(tf.querySelector('.su-tf').offsetWidth+14)*a.dataset.dir})})});
   tf.addEventListener('scroll',tfu);window.addEventListener('resize',tfu);tfu();
+  document.querySelectorAll('a[href="#pricing"]').forEach(function(a){a.addEventListener('click',function(e){
+    var s=document.getElementById('pricing');if(!s)return;e.preventDefault();
+    var h=document.querySelector('.su-nav'),off=(h?h.getBoundingClientRect().bottom:0)+16;
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:s.getBoundingClientRect().top+window.pageYOffset-off,behavior:reduce?'auto':'smooth'});
+    if(history.replaceState)history.replaceState(null,'','#pricing');
+  })});
 })();
 </script>
 </body>
