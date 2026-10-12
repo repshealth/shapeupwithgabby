@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Shape Up with Gabby is a fitness app for women with gym and home workout plans, nutrition tracking, classes and a supportive community.">
+<meta name="rating" content="general">
 <title>Shape Up with Gabby | Training, nutrition and community in one app</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,13 +83,13 @@ a{color:inherit}
 .su-hero-phone1{position:absolute;width:220px;left:250px;top:70px;transform:rotate(-4deg);z-index:3}
 .su-hero-phone2{position:absolute;width:190px;left:390px;top:20px;transform:rotate(-6deg);z-index:2}
 
-/* Marquee strip */
-.su-strip{position:relative;z-index:4;margin-top:-30px;height:110px}
-.su-strip::before{content:"";position:absolute;inset:30px -20px 20px;background:var(--su-yellow);transform:rotate(-1deg)}
-.su-strip-band{position:absolute;left:-30px;right:-30px;top:20px;background:var(--su-blue);transform:rotate(-3deg);overflow:hidden;padding:14px 0;box-shadow:0 8px 20px rgba(0,0,0,.08)}
-.su-strip-track{display:flex;gap:46px;width:max-content;animation:su-marquee 32s linear infinite;color:#fff;font-size:17px;text-transform:uppercase;white-space:nowrap;align-items:center}
-.su-strip-track b{font-weight:700}
-.su-strip-track .spark{color:#FFE08A;font-size:22px}
+/* Stats ticker */
+.su-ticker{position:relative;z-index:4;margin-top:-30px;height:110px}
+.su-ticker::before{content:"";position:absolute;inset:30px -20px 20px;background:var(--su-yellow);transform:rotate(-1deg)}
+.su-ticker-band{position:absolute;left:-30px;right:-30px;top:20px;background:var(--su-blue);transform:rotate(-3deg);overflow:hidden;padding:14px 0;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.su-ticker-track{display:flex;gap:46px;width:max-content;animation:su-marquee 32s linear infinite;color:#fff;font-size:17px;text-transform:uppercase;white-space:nowrap;align-items:center}
+.su-ticker-track b{font-weight:700}
+.su-ticker-track .spark{color:#FFE08A;font-size:22px}
 @keyframes su-marquee{to{transform:translateX(-50%)}}
 
 /* ===== What Shape Up is ===== */
@@ -312,8 +314,8 @@ a{color:inherit}
   .su-hero-gabby{height:420px;left:-30px}
   .su-hero-phone1{width:150px;left:auto;right:30px;top:40px}
   .su-hero-phone2{width:120px;left:auto;right:4px;top:10px}
-  .su-strip{margin-top:-40px}
-  .su-strip-track{font-size:14px}
+  .su-ticker{margin-top:-40px}
+  .su-ticker-track{font-size:14px}
   .su-head-row{flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:30px}
   .su-intro{max-width:none}
   .su-about{padding:40px 0 70px}
@@ -381,7 +383,7 @@ a{color:inherit}
   .su-bigmark img{width:100%}
 }
 @media (prefers-reduced-motion:reduce){
-  .su-strip-track{animation:none}
+  .su-ticker-track{animation:none}
   html{scroll-behavior:auto}
   .su-btn:hover{transform:none}
 }
@@ -421,7 +423,7 @@ a{color:inherit}
         <span>48,000+ Reviews</span>
       </div>
       <h1>Your strongest<br>self starts here.</h1>
-      <p class="lead">Training, nutrition and 12,400 women who get it in one app that actually holds you to it. £24.99 a month. Your first 7 days are free.</p>
+      <p class="lead">Training, nutrition and 12,400 women training alongside you, in one app that actually holds you to it. £24.99 a month. Your first 7 days are free.</p>
       <div class="su-hero-ctas">
         <a class="su-btn su-btn--blue" href="#pricing">Start free trial</a>
         <a class="su-btn su-btn--outline" href="#inside">See what's inside <span aria-hidden="true">↓</span></a>
@@ -438,9 +440,9 @@ a{color:inherit}
       <div class="su-phone su-hero-phone1"><img src="images/img-12.webp" alt="Shape Up workout tracker screen"></div>
     </div>
   </div>
-  <div class="su-strip" aria-hidden="true">
-    <div class="su-strip-band">
-      <div class="su-strip-track">
+  <div class="su-ticker" aria-hidden="true">
+    <div class="su-ticker-band">
+      <div class="su-ticker-track">
         <span><b>Zero</b> app crashes since launch</span><span class="spark">✦</span>
         <span><b>1000+ 5</b> star reviews</span><span class="spark">✦</span>
         <span><b>12,400</b> women training</span><span class="spark">✦</span>
@@ -486,10 +488,10 @@ a{color:inherit}
       <!-- Desktop: accordion list -->
       <ul class="su-fx-list" id="suFxList">
         <li class="su-fx-item on" data-i="0"><button aria-expanded="true"><span class="ic" aria-hidden="true">💪</span>Training that progresses<span class="pl" aria-hidden="true">+</span></button><p>Structured gym and home plans, 3–5 days a week, with sets, reps and suggested weights based on what you actually lifted last week.</p></li>
-        <li class="su-fx-item" data-i="1"><button aria-expanded="false"><span class="ic" aria-hidden="true">🥗</span>Nutrition without the faff<span class="pl" aria-hidden="true">+</span></button><p>Barcode scanner, full UK food database, calorie and macro targets set for you. Nothing is banned and nothing gets weighed in shame.</p></li>
-        <li class="su-fx-item" data-i="2"><button aria-expanded="false"><span class="ic" aria-hidden="true">👯‍♀️</span>A community that shows up<span class="pl" aria-hidden="true">+</span></button><p>A private group of women training the same plans. Ask anything, someone has already been exactly where you are today.</p></li>
-        <li class="su-fx-item" data-i="3"><button aria-expanded="false"><span class="ic" aria-hidden="true">🎥</span>Classes for every kind of week<span class="pl" aria-hidden="true">+</span></button><p>Strength, glutes, HIIT, low impact, pilates and core from 20 minutes up, on demand, with a weekly live from Gabby.</p></li>
-        <li class="su-fx-item" data-i="4"><button aria-expanded="false"><span class="ic" aria-hidden="true">🩷</span>Habit &amp; period tracking<span class="pl" aria-hidden="true">+</span></button><p>Train with your cycle, not against it. Water, steps, sleep and protein in one dashboard, with streaks that don't punish a missed day.</p></li>
+        <li class="su-fx-item" data-i="1"><button aria-expanded="false"><span class="ic" aria-hidden="true">🥗</span>Nutrition without the faff<span class="pl" aria-hidden="true">+</span></button><p>Barcode scanner, full UK food database, calorie and macro targets set for you. Nothing is banned and there is no guilt attached.</p></li>
+        <li class="su-fx-item" data-i="2"><button aria-expanded="false"><span class="ic" aria-hidden="true">👯‍♀️</span>A community that shows up<span class="pl" aria-hidden="true">+</span></button><p>A supportive community of women training the same plans. Ask anything, someone has already been exactly where you are today.</p></li>
+        <li class="su-fx-item" data-i="3"><button aria-expanded="false"><span class="ic" aria-hidden="true">🎥</span>Classes for every kind of week<span class="pl" aria-hidden="true">+</span></button><p>Strength, lower body, HIIT, low impact, pilates and core from 20 minutes up, on demand, with a weekly live from Gabby.</p></li>
+        <li class="su-fx-item" data-i="4"><button aria-expanded="false"><span class="ic" aria-hidden="true">🩷</span>Habit &amp; cycle tracking<span class="pl" aria-hidden="true">+</span></button><p>Train with your cycle, not against it. Water, steps, sleep and protein in one dashboard, with streaks that don't punish a missed day.</p></li>
         <li class="su-fx-item" data-i="5"><button aria-expanded="false"><span class="ic" aria-hidden="true">✨</span>New content every month<span class="pl" aria-hidden="true">+</span></button><p>Fresh plans, classes and challenges added monthly at no extra cost, so month twelve looks nothing like month one.</p></li>
       </ul>
       <!-- Mobile: tabs + compact panel -->
@@ -534,7 +536,7 @@ a{color:inherit}
     <div class="su-pills">
       <span class="su-pill"><i aria-hidden="true">💪</i>Workout Logger</span><span class="su-pill"><i aria-hidden="true">🥗</i>Meal Plan System</span><span class="su-pill"><i aria-hidden="true">📷</i>Food Logger &amp; Scanner</span><span class="su-pill"><i aria-hidden="true">❤️</i>Apple &amp; Google Health</span>
       <span class="su-pill"><i aria-hidden="true">🎯</i>Goal Setting</span><span class="su-pill"><i aria-hidden="true">📊</i>Workout PRs &amp; History</span><span class="su-pill"><i aria-hidden="true">📸</i>Progress Photos</span><span class="su-pill"><i aria-hidden="true">💧</i>Habit Tracking</span><span class="su-pill"><i aria-hidden="true">✅</i>Task System</span>
-      <span class="su-pill"><i aria-hidden="true">📋</i>Check-In System</span><span class="su-pill"><i aria-hidden="true">👱‍♀️</i>Period Tracker</span><span class="su-pill"><i aria-hidden="true">🍴</i>Recipes &amp; Favourites</span><span class="su-pill"><i aria-hidden="true">🩹</i>Injury System</span>
+      <span class="su-pill"><i aria-hidden="true">📋</i>Check-In System</span><span class="su-pill"><i aria-hidden="true">👱‍♀️</i>Cycle Tracker</span><span class="su-pill"><i aria-hidden="true">🍴</i>Recipes &amp; Favourites</span><span class="su-pill"><i aria-hidden="true">🩹</i>Injury System</span>
     </div>
   </div>
 </section>
@@ -606,14 +608,14 @@ a{color:inherit}
     <article class="su-pcard">
       <div class="ph"><img src="images/img-20.webp" alt="Shape Up members on a group trip"><span class="su-tag">New programme!</span></div>
       <p class="su-meta">10 weeks · gym + home</p>
-      <h3>Hot Girl Summer</h3>
+      <h3>HGS Summer Programme</h3>
       <p>Progressive training plus flexible nutrition, so you can actually enjoy the summer you're training for.</p>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-21.webp" alt="Gabby in the gym with a barbell"><span class="su-tag">New programme!</span></div>
       <p class="su-meta">28 days · 4 days a week</p>
       <h3>Shred in 28</h3>
-      <p>Four weeks to tighten up, lean out and feel stronger, structured so every session builds on the last.</p>
+      <p>Four weeks to get fitter, leaner and stronger, structured so every session builds on the last.</p>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-22.webp" alt="Gabby carrying a weighted pack" style="object-position:40% center"><span class="su-tag">New programme!</span></div>
@@ -637,7 +639,7 @@ a{color:inherit}
       <div class="ph"><img src="images/img-24.webp" alt="Gabby lifting a dumbbell" style="object-position:60% 30%"><button class="play" aria-label="Play video">▶</button></div>
       <p class="su-meta">Gym, home, classes</p>
       <h3>Every style included</h3>
-      <p>Strength, glutes, HIIT, low impact, pilates and core. Pick the plan that suits your week and switch whenever you like.</p>
+      <p>Strength, lower body, HIIT, low impact, pilates and core. Pick the plan that suits your week and switch whenever you like.</p>
     </article>
   </div>
   <div class="su-wrap">
@@ -658,7 +660,7 @@ a{color:inherit}
         <p class="su-eyebrow">Results</p>
         <h2 class="su-h2">Real women,<strong>real results</strong></h2>
       </div>
-      <p class="su-intro" style="max-width:270px">Women supporting women, and it shows. Every woman here trained the same plans you'd start on Monday. Different bodies, different starting points, same app.</p>
+      <p class="su-intro" style="max-width:270px">Women supporting women, and it shows. Every woman here trained the same plans you'd start on Monday. Different goals, different starting points, same app.</p>
     </div>
     <article class="su-story">
       <div class="ph"><img src="images/img-25.webp" alt="Beth's before and after, side view, four weeks apart"><span class="lbl b">Before</span><span class="lbl a">After</span></div>
@@ -719,7 +721,7 @@ a{color:inherit}
       <p class="su-eyebrow">Meet Gabby</p>
       <h2 class="su-h2">I built this for<strong>women like me</strong></h2>
       <p>I spent years training the way the internet told me to, hating it, and starting again every January. What changed it was a plan that progressed, food I didn't have to think about twice, and women around me who got it.</p>
-      <p>Shape Up is that, in an app. I write every plan, I'm in the community every day, and I go live every week. No shame, no punishing yourself for a weekend. Just training that adds up.</p>
+      <p>Shape Up is that, in an app. I write every plan, I'm in the community every day, and I go live every week. No guilt, no starting over after a weekend. Just training that adds up.</p>
       <div class="su-creds">
         <div><span class="ic" aria-hidden="true">🏆</span><b>Top</b><span>Qualified personal trainer &amp; nutrition coach</span></div>
         <div><span class="ic" aria-hidden="true">✨</span><b>6 yrs</b><span>Coaching women in person and online</span></div>
@@ -741,7 +743,7 @@ a{color:inherit}
       <small>7 days free, then £24.99 a month.</small>
     </div>
     <div>
-      <details open><summary><span class="n">01</span>What exactly do I get for £24.99 a month?<span class="t">+</span></summary><p>Everything: all gym and home training plans, every class, nutrition guidance and meal ideas, the barcode scanner, calorie and macro tracking, habit and period trackers, the private community and the weekly live with Gabby. New content is added every month at no extra cost, and there is no higher tier to upgrade to.</p></details>
+      <details open><summary><span class="n">01</span>What exactly do I get for £24.99 a month?<span class="t">+</span></summary><p>Everything: all gym and home training plans, every class, nutrition guidance and meal ideas, the barcode scanner, calorie and macro tracking, habit and cycle trackers, the member community and the weekly live with Gabby. New content is added every month at no extra cost, and there is no higher tier to upgrade to.</p></details>
       <details><summary><span class="n">02</span>How does the 7 day free trial work?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Pick any plan and your first 7 days are free. Cancel in the app before the trial ends and you won't be charged.</p></details>
       <details><summary><span class="n">03</span>Can I cancel whenever I want?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. You can cancel in two taps inside the app, with no email or phone call needed.</p></details>
       <details><summary><span class="n">04</span>I'm a complete beginner. Is this for me?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. Every exercise has a demo video, sessions start from 20 minutes, and your suggested weights are based on what you actually lifted last week.</p></details>
@@ -749,8 +751,8 @@ a{color:inherit}
       <details><summary><span class="n">06</span>How much time do I need each week?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Plans run 3 to 5 days a week, with sessions from 20 minutes.</p></details>
       <details><summary><span class="n">07</span>Membership or a one off programme, which should I pick?<span class="t">+</span></summary><p>[DRAFT, confirm with client] A one off programme is yours forever with no subscription. The membership includes every programme plus new content each month, and works out cheaper from month one.</p></details>
       <details><summary><span class="n">08</span>Do I still need a separate food tracking app?<span class="t">+</span></summary><p>[DRAFT, confirm with client] No. The barcode scanner, full UK food database and calorie and macro tracking are all built into Shape Up.</p></details>
-      <details><summary><span class="n">09</span>Will the plans work around my cycle?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. The period tracker sits alongside your training so you can train with your cycle, not against it.</p></details>
-      <details><summary><span class="n">10</span>What if I get stuck or need help?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Ask in the private community, join Gabby's weekly live, or email hello@shapeupwithgabby.co.uk and you'll hear back within a day.</p></details>
+      <details><summary><span class="n">09</span>Will the plans work around my cycle?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Yes. The cycle tracker sits alongside your training so you can train with your cycle, not against it.</p></details>
+      <details><summary><span class="n">10</span>What if I get stuck or need help?<span class="t">+</span></summary><p>[DRAFT, confirm with client] Ask in the member community, join Gabby's weekly live, or email hello@shapeupwithgabby.co.uk and you'll hear back within a day.</p></details>
     </div>
   </div>
 </section>
@@ -784,7 +786,7 @@ a{color:inherit}
         <div class="su-stores"><a href="#"><img src="images/img-41.webp" alt="Download on the App Store"></a><a href="#"><img src="images/img-42.webp" alt="Get it on Google Play"></a></div>
       </div>
       <div><h4>Membership</h4><ul><li><a href="#pricing">Pricing</a></li><li><a href="#inside">What's inside</a></li><li><a href="#inside">Inside the app</a></li><li><a href="https://join.shapeupwithgabby.co.uk/auth/login">Member login</a></li></ul></div>
-      <div><h4>Programmes</h4><ul><li><a href="#programmes">Hot Girl Summer</a></li><li><a href="#programmes">Shred in 28</a></li><li><a href="#programmes">SAS: Strength &amp; Sustain</a></li><li><a href="#programmes">8 Week Glute Programme</a></li><li><a href="#programmes">Reset &amp; Shred</a></li></ul></div>
+      <div><h4>Programmes</h4><ul><li><a href="#programmes">HGS Summer Programme</a></li><li><a href="#programmes">Shred in 28</a></li><li><a href="#programmes">SAS: Strength &amp; Sustain</a></li><li><a href="#programmes">8 Week Glute Programme</a></li><li><a href="#programmes">Reset &amp; Shred</a></li></ul></div>
       <div><h4>Help &amp; social</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="mailto:hello@shapeupwithgabby.co.uk">Contact</a></li><li><a href="#results">Results</a></li><li><a href="https://www.instagram.com/gabbydawnallen/?hl=en" target="_blank" rel="noopener">Instagram</a></li></ul></div>
     </div>
     <div class="su-bigmark"><img src="images/img-01.webp" alt=""></div>
