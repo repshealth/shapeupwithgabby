@@ -7,3 +7,4 @@ Landing page for Shape Up with Gabby.
 - `elementor/shape-up-elementor-template.json` is the same page as an Elementor template. Import it under Templates > Saved Templates > Import, then set the page layout to Elementor Canvas.
 - `programmes.html` is the one off programmes page, linked from the "Buy a one off programme" button.
 - `waitlist.html` is the pre-registration page for upcoming programmes.
+- `scripts/waitlist-sheet.gs` is the Google Apps Script that saves waitlist sign-ups to the "Shape Up Waitlist Sign-ups" Google Sheet. Its web app URL goes in `SHEET_URL` in `waitlist.html`.

@@ -68,6 +68,7 @@ h1 strong{display:block;font-weight:700}
 .form input:focus{outline:none;border-color:var(--su-blue);background:#fff}
 .form button{margin-top:10px;width:100%;border:0;cursor:pointer;border-radius:999px;background:var(--su-ink);color:#fff;font:600 13px var(--su-text);letter-spacing:1.2px;text-transform:uppercase;padding:16px}
 .form button:hover{background:#000}
+.form button:disabled{opacity:.7;cursor:default}
 .form small{display:block;text-align:center;font-size:11px;color:var(--su-muted);margin-top:10px}
 .done{display:none;text-align:center;padding:14px 8px}
 .done b{display:block;font-family:var(--su-head);font-size:24px;text-transform:uppercase;font-weight:700}
@@ -148,6 +149,7 @@ h1 strong{display:block;font-weight:700}
           <div><label for="wlName">First name</label><input id="wlName" name="name" type="text" autocomplete="given-name" placeholder="First name" required></div>
           <div><label for="wlEmail">Email</label><input id="wlEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required></div>
         </div>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><input name="company" type="text" tabindex="-1" autocomplete="off"></div>
         <button type="submit">Join the waitlist</button>
         <small>No spam. Unsubscribe in one click.</small>
         <div class="done" role="status" aria-live="polite"><b>You're on the list</b><p>We'll email you as soon as the new programmes go live.</p></div>
@@ -178,8 +180,14 @@ h1 strong{display:block;font-weight:700}
     var em=f.querySelector('#wlEmail'),nm=f.querySelector('#wlName');
     if(!nm.value.trim()){nm.focus();return}
     if(!/^\S+@\S+\.\S+$/.test(em.value)){em.focus();em.setCustomValidity('Enter a valid email');em.reportValidity();em.setCustomValidity('');return}
-    // TODO: send name + email to the email platform here
-    window.location.href='https://www.shapeupwithgabby.co.uk/resetthankyou/';
+    var THANKS='https://www.shapeupwithgabby.co.uk/resetthankyou/';
+    var SHEET_URL=''; // Google Apps Script web app URL goes here
+    var btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Joining...';
+    var go=function(){window.location.href=THANKS};
+    if(!SHEET_URL){go();return}
+    var data=new URLSearchParams({name:nm.value.trim(),email:em.value.trim(),source:'Waitlist page',company:f.company.value});
+    var timer=setTimeout(go,4000);
+    fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:data,keepalive:true}).then(function(){clearTimeout(timer);go()},function(){clearTimeout(timer);go()});
   });
 })();
 </script>
