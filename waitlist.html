@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="New Shape Up with Gabby training programmes are coming soon. Join the waitlist to hear first when they launch.">
+<meta name="rating" content="general">
+<title>Join the Waitlist | Shape Up with Gabby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --su-ink:#121212;--su-body:#3d3d3d;--su-muted:#6f6f6f;
+  --su-yellow:#FDE08D;--su-cream:#FFF7DD;--su-blue:#62BAF5;--su-blue-soft:#EAF4FE;
+  --su-head:'Oswald','Arial Narrow',Arial,sans-serif;
+  --su-text:'Poppins',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%}
+body{margin:0;color:var(--su-ink);font-family:var(--su-text);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background:var(--su-cream);overflow-x:hidden}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--su-blue);outline-offset:3px}
+
+/* Background: warm glow, blue sweep and a giant faint wordmark */
+.wl{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+  background:
+    radial-gradient(55% 60% at 72% 42%,#FFE39A 0%,rgba(255,227,154,0) 70%),
+    radial-gradient(40% 45% at 8% 92%,rgba(98,186,245,.28) 0%,rgba(98,186,245,0) 70%),
+    linear-gradient(160deg,#FFF9E6 0%,#FFF1C7 55%,#FDE6A6 100%)}
+.wl::before{content:"";position:absolute;right:-12vw;top:50%;width:min(78vw,900px);aspect-ratio:1;border-radius:50%;
+  transform:translateY(-46%);background:var(--su-blue);opacity:.9}
+.wl::after{content:"";position:absolute;right:-6vw;top:50%;width:min(64vw,740px);aspect-ratio:1;border-radius:50%;
+  transform:translateY(-44%);border:2px dashed rgba(255,255,255,.55)}
+.word{position:absolute;left:-2vw;bottom:-4vw;font-family:var(--su-head);font-weight:700;font-size:min(24vw,360px);line-height:.8;
+  color:rgba(18,18,18,.045);letter-spacing:-4px;white-space:nowrap;pointer-events:none;z-index:0}
+
+.top{position:relative;z-index:3;max-width:1180px;margin:0 auto;padding:22px 24px 0;display:flex;justify-content:space-between;align-items:center}
+.top img{height:26px;width:auto}
+.top a.back{font-size:13px;font-weight:600;text-decoration:none;color:var(--su-ink)}
+.top a.back:hover{text-decoration:underline}
+
+.grid{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;min-height:calc(100svh - 70px)}
+.copy{padding:40px 0 60px;max-width:580px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:7px 14px 7px 10px;font-size:12px;font-weight:600;box-shadow:0 4px 14px rgba(160,120,20,.12)}
+.badge i{width:9px;height:9px;border-radius:50%;background:#E8463B;box-shadow:0 0 0 0 rgba(232,70,59,.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(232,70,59,0)}100%{box-shadow:0 0 0 0 rgba(232,70,59,0)}}
+h1{font-family:var(--su-head);text-transform:uppercase;font-weight:300;font-size:clamp(44px,5.8vw,82px);line-height:.95;letter-spacing:-1px;margin:22px 0 18px}
+h1 strong{display:block;font-weight:700}
+.lead{font-size:16px;max-width:440px;margin:0 0 28px;color:var(--su-body)}
+
+.form{background:#fff;border-radius:22px;padding:16px;box-shadow:0 20px 50px rgba(150,110,20,.16);max-width:470px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.form input{width:100%;font:inherit;font-size:14px;padding:14px 18px;border-radius:999px;border:1.5px solid #ECECEC;background:#F7F7F7;color:var(--su-ink)}
+.form input:focus{outline:none;border-color:var(--su-blue);background:#fff}
+.form button{margin-top:10px;width:100%;border:0;cursor:pointer;border-radius:999px;background:var(--su-ink);color:#fff;font:600 13px var(--su-text);letter-spacing:1.2px;text-transform:uppercase;padding:16px}
+.form button:hover{background:#000}
+.form small{display:block;text-align:center;font-size:11px;color:var(--su-muted);margin-top:10px}
+.done{display:none;text-align:center;padding:14px 8px}
+.done b{display:block;font-family:var(--su-head);font-size:24px;text-transform:uppercase;font-weight:700}
+.done p{margin:4px 0 0;font-size:13.5px;color:var(--su-body)}
+.form.sent .fields,.form.sent button,.form.sent small{display:none}
+.form.sent .done{display:block}
+
+.perks{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;font-weight:500}
+.perks li{display:flex;align-items:center;gap:7px}
+.perks li::before{content:"✓";display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--su-blue);color:#fff;font-size:10px;font-weight:700}
+
+.art{position:relative;align-self:end;height:min(86svh,760px)}
+.art img{position:absolute;bottom:0;left:50%;transform:translateX(-46%);height:100%;width:auto;max-width:none;filter:drop-shadow(0 30px 40px rgba(20,70,120,.25))}
+.chip{position:absolute;z-index:3;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 14px 34px rgba(20,70,120,.18);font-size:12px;font-weight:600;line-height:1.3}
+.chip b{display:block;font-family:var(--su-head);font-size:22px;font-weight:700;line-height:1}
+.chip.c1{top:22%;left:2%}
+.chip.c2{bottom:18%;right:0}
+
+@media (max-width:860px){
+  .wl::before{right:-40vw;top:auto;bottom:-10vw;transform:none;width:120vw}
+  .wl::after{right:-30vw;top:auto;bottom:-2vw;transform:none;width:100vw}
+  .grid{grid-template-columns:1fr;min-height:0}
+  .copy{padding:34px 0 10px;text-align:center;margin:0 auto}
+  .lead{margin:0 auto 22px;font-size:14.5px}
+  .form{margin:0 auto}
+  .fields{grid-template-columns:1fr}
+  .perks{justify-content:center}
+  .art{height:440px;max-width:360px;width:100%;margin:10px auto 0}
+  .chip{padding:9px 12px;font-size:11px}
+  .chip b{font-size:18px}
+  .chip.c1{left:-4px;top:16%}.chip.c2{right:-4px;bottom:22%}
+}
+@media (prefers-reduced-motion:reduce){.badge i{animation:none}}
+</style>
+</head>
+<body>
+<main class="wl">
+  <div class="word" aria-hidden="true">COMING SOON</div>
+
+  <header class="top">
+    <a href="index.html"><img src="images/img-01.webp" alt="Shape Up"></a>
+    <a class="back" href="index.html">Visit Shape Up</a>
+  </header>
+
+  <div class="grid">
+    <section class="copy">
+      <span class="badge"><i aria-hidden="true"></i>New programmes coming soon</span>
+      <h1>Something new<strong>is coming</strong></h1>
+      <p class="lead">Gabby is putting the finishing touches on brand new training programmes. Join the waitlist to be first to hear when they launch, and get early access before anyone else.</p>
+
+      <form class="form" id="wlForm" action="#" method="post" novalidate>
+        <div class="fields">
+          <div><label for="wlName">First name</label><input id="wlName" name="name" type="text" autocomplete="given-name" placeholder="First name" required></div>
+          <div><label for="wlEmail">Email</label><input id="wlEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required></div>
+        </div>
+        <button type="submit">Join the waitlist</button>
+        <small>No spam. Unsubscribe in one click.</small>
+        <div class="done" role="status" aria-live="polite"><b>You're on the list</b><p>We'll email you as soon as the new programmes go live.</p></div>
+      </form>
+
+      <ul class="perks">
+        <li>First to know at launch</li>
+        <li>Early access</li>
+        <li>Waitlist-only offers</li>
+      </ul>
+    </section>
+
+    <div class="art" aria-hidden="true">
+      <div class="chip c1"><b>New</b>programmes</div>
+      <img src="images/img-10.webp" alt="">
+      <div class="chip c2"><b>12,400</b>women training</div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var f=document.getElementById('wlForm');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var em=f.querySelector('#wlEmail'),nm=f.querySelector('#wlName');
+    if(!nm.value.trim()){nm.focus();return}
+    if(!/^\S+@\S+\.\S+$/.test(em.value)){em.focus();em.setCustomValidity('Enter a valid email');em.reportValidity();em.setCustomValidity('');return}
+    // TODO: send name + email to the email platform here
+    f.classList.add('sent');
+  });
+})();
+</script>
+</body>
+</html>

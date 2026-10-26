@@ -6,3 +6,4 @@ Landing page for Shape Up with Gabby.
 - `images/` holds every image the page uses.
 - `elementor/shape-up-elementor-template.json` is the same page as an Elementor template. Import it under Templates > Saved Templates > Import, then set the page layout to Elementor Canvas.
 - `programmes.html` is the one off programmes page, linked from the "Buy a one off programme" button.
+- `waitlist.html` is the pre-registration page for upcoming programmes.
