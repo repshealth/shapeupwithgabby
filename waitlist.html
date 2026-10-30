@@ -185,7 +185,7 @@ h1 strong{display:block;font-weight:700}
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Joining...';
     var go=function(){window.location.href=THANKS};
     if(!SHEET_URL){go();return}
-    var data=new URLSearchParams({name:nm.value.trim(),email:em.value.trim(),source:'Waitlist page',company:f.company.value});
+    var data=new URLSearchParams({name:nm.value.trim(),email:em.value.trim(),source:'WordPress waitlist',company:f.company.value});
     var timer=setTimeout(go,4000);
     fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:data,keepalive:true}).then(function(){clearTimeout(timer);go()},function(){clearTimeout(timer);go()});
   });
