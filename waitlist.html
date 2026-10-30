@@ -183,11 +183,17 @@ h1 strong{display:block;font-weight:700}
     var THANKS='https://www.shapeupwithgabby.co.uk/resetthankyou/';
     var SHEET_URL='https://script.google.com/macros/s/AKfycbz38G-7_eq88O840aGpX9Gx_lN0fXw0MW_1HL33APCY9j3HIPHdzGq9jKcaLblkFnJ4/exec'; // Google Apps Script web app (Gabby Waitlist Sign Ups sheet)
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Joining...';
-    var go=function(){window.location.href=THANKS};
-    if(!SHEET_URL){go();return}
-    var data=new URLSearchParams({name:nm.value.trim(),email:em.value.trim(),source:'WordPress waitlist',company:f.company.value});
-    var timer=setTimeout(go,4000);
-    fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:data,keepalive:true}).then(function(){clearTimeout(timer);go()},function(){clearTimeout(timer);go()});
+    var CRM_URL='https://dashboard.jolly-heart-2b8d.workers.dev/api/forms'; // REPS dashboard: lands in Gabby's Leads
+    var done=false,go=function(){if(done)return;done=true;window.location.href=THANKS};
+    var name=nm.value.trim(),email=em.value.trim();
+    var sends=[];
+    if(SHEET_URL)sends.push(fetch(SHEET_URL,{method:'POST',mode:'no-cors',keepalive:true,
+      body:new URLSearchParams({name:name,email:email,source:'WordPress waitlist',company:f.company.value})}));
+    if(CRM_URL)sends.push(fetch(CRM_URL,{method:'POST',mode:'no-cors',keepalive:true,
+      body:new URLSearchParams({client:'shape-up-with-gabby',source:'prereg',form:'New programmes waitlist',
+        page:location.hostname+location.pathname,name:name,email:email,_gotcha:f.company.value})}));
+    setTimeout(go,4000);
+    Promise.all(sends.map(function(p){return p.catch(function(){})})).then(go);
   });
 })();
 </script>
