@@ -181,7 +181,7 @@ h1 strong{display:block;font-weight:700}
     if(!nm.value.trim()){nm.focus();return}
     if(!/^\S+@\S+\.\S+$/.test(em.value)){em.focus();em.setCustomValidity('Enter a valid email');em.reportValidity();em.setCustomValidity('');return}
     var THANKS='https://www.shapeupwithgabby.co.uk/resetthankyou/';
-    var SHEET_URL='https://script.google.com/macros/s/AKfycbz3knLbVZd0hCaGtJ8u15il3v4MEsRKgnJ22XeLoS6ZHas_9AkPf4SQg-OKehRLwEw5/exec'; // Google Apps Script web app (Gabby Waitlist Sign Ups sheet)
+    var SHEET_URL='https://script.google.com/macros/s/AKfycbz38G-7_eq88O840aGpX9Gx_lN0fXw0MW_1HL33APCY9j3HIPHdzGq9jKcaLblkFnJ4/exec'; // Google Apps Script web app (Gabby Waitlist Sign Ups sheet)
     var btn=f.querySelector('button[type=submit]');btn.disabled=true;btn.textContent='Joining...';
     var go=function(){window.location.href=THANKS};
     if(!SHEET_URL){go();return}
