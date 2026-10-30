@@ -1,9 +1,8 @@
 /**
- * Shape Up waitlist -> Google Sheet
- * Paste into the sheet's Extensions > Apps Script, then Deploy > New deployment > Web app
- * (Execute as: Me, Who has access: Anyone). Send the Web app URL back so it can be added to the page.
+ * Shape Up waitlist -> "Gabby Waitlist Sign Ups" Google Sheet
+ * Deployed from the sheet's Extensions > Apps Script as a Web app (Execute as: Me, Who has access: Anyone).
  */
-var SHEET_ID = '1dVEQ9SQKQihVnZRbPNeEK472xjjPVtan6FKXhf3Xxeg';
+var SHEET_ID = '1o56HLsf8SZX9G_Yf8nTzg9Gor4Jifa64db4LRr2yAQA';
 
 function clean(v) {
   v = String(v || '').trim().slice(0, 200);
@@ -19,6 +18,7 @@ function doPost(e) {
   lock.waitLock(10000);
   try {
     var sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+    if (sheet.getLastRow() === 0) sheet.appendRow(['Date', 'First name', 'Email', 'Source']);
     sheet.appendRow([new Date(), clean(p.name), clean(p.email), clean(p.source)]);
   } finally {
     lock.releaseLock();
