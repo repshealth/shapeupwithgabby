@@ -195,6 +195,11 @@ a{color:inherit}
 .su-prog-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px max(24px,calc((100vw - var(--su-wrap))/2 + 24px)) 18px;scroll-padding-left:max(24px,calc((100vw - var(--su-wrap))/2 + 24px));scrollbar-width:none}
 .su-prog-track::-webkit-scrollbar{display:none}
 .su-pcard{flex:0 0 300px;scroll-snap-align:start}
+.su-pcard{position:relative}
+.su-pcard .ph img{transition:transform .4s ease}
+.su-pcard:hover .ph img{transform:scale(1.04)}
+.su-pcard-more{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--su-ink);border-bottom:2px solid var(--su-yellow);padding-bottom:2px}
+.su-pcard-link{position:absolute;inset:0;z-index:4;border-radius:16px}
 .su-pcard .ph{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#eee;margin-bottom:16px}
 .su-pcard .ph img{width:100%;height:100%;object-fit:cover}
 .su-pcard h3{font-family:var(--su-head);font-weight:500;font-size:20px;text-transform:uppercase;margin:0 0 6px}
@@ -615,42 +620,56 @@ a{color:inherit}
       <p class="su-meta">8 weeks · strength + cardio</p>
       <h3>Island Body V2</h3>
       <p>The revamped version of the best selling Island Body programme. Lower body focused strength training paired with cardio, with clear progressions so every week builds on the last.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/island-body-v2" aria-label="See Island Body V2"></a>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-44.webp" alt="Gabby in a strength pose" style="object-position:62% 55%"><span class="su-tag">New programme!</span></div>
       <p class="su-meta">8 weeks · strength focus</p>
       <h3>Strength Is Power</h3>
       <p>Eight weeks built around getting genuinely stronger, with progressive sessions centred on the big compound lifts and clear weekly targets.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/strength-is-power" aria-label="See Strength Is Power"></a>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-20.webp" alt="Shape Up members on a group trip"></div>
       <p class="su-meta">10 weeks · gym + home</p>
       <h3>HGS Summer Programme</h3>
       <p>Progressive training plus flexible nutrition, so you can actually enjoy the summer you're training for.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/hot-girl-summer" aria-label="See HGS Summer Programme"></a>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-21.webp" alt="Gabby in the gym with a barbell"></div>
       <p class="su-meta">28 days · 4 days a week</p>
       <h3>Shred in 28</h3>
       <p>Four weeks to get fitter, leaner and stronger, structured so every session builds on the last.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/shred-in-28" aria-label="See Shred in 28"></a>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-22.webp" alt="Gabby carrying a weighted pack" style="object-position:40% center"></div>
       <p class="su-meta">8 weeks · 4 day split</p>
       <h3>SAS: Strength &amp; Sustain</h3>
       <p>Heavy compound lifts and conditioning circuits, built to make strength a habit rather than a phase.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/sas-strength-and-sustain" aria-label="See SAS: Strength & Sustain"></a>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-23.webp" alt="Gabby holding dumbbells" style="object-position:center 20%"></div>
       <p class="su-meta">8 weeks · 4 day split</p>
       <h3>Glute Programme</h3>
       <p>Heavy compound lifts and conditioning circuits, built to make strength a habit rather than a phase.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/glute-programme" aria-label="See Glute Programme"></a>
     </article>
     <article class="su-pcard">
       <div class="ph"><img src="images/img-19.webp" alt="Gabby in training kit" style="object-position:center 20%"></div>
       <p class="su-meta">Reset + rebuild</p>
       <h3>Reset &amp; Shred</h3>
       <p>Reset your routine and get back on track, with structured training that builds week on week.</p>
+      <span class="su-pcard-more">See programme →</span>
+      <a class="su-pcard-link" href="https://shapeupapp.co.uk/reset-and-shred" aria-label="See Reset & Shred"></a>
     </article>
     <article class="su-pcard su-pcard--video">
       <div class="ph"><img src="images/img-24.webp" alt="Gabby lifting a dumbbell" style="object-position:60% 30%"><button class="play" aria-label="Play video">▶</button></div>
