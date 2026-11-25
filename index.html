@@ -403,6 +403,7 @@ a{color:inherit}
 }
 
 
+
 /* fixes: footer mark, Meet Gabby photo, reviews */
 .su-bigmark{padding:28px 0 22px}
 .su-bigmark img{width:auto;height:48px;max-width:60%;opacity:1}
@@ -414,6 +415,11 @@ a{color:inherit}
   .su-foot-grid{grid-template-columns:1fr 1fr;gap:26px 30px}
 }
 @media (max-width:640px){
+  .su-tf-track{display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:visible;padding:0 12px;scroll-snap-type:none}
+  .su-tf{flex:none;width:auto;border-radius:10px}
+  .su-tf .lbl{font-size:8px;padding:3px 6px;top:6px}
+  .su-tf .lbl.b{left:6px}
+  .su-tf .lbl.a{left:calc(50% + 6px)}
   .su-gabby-ph{max-width:360px;margin:0 auto}
   .su-bigmark img{height:36px}
   .su-reviews{grid-template-columns:1fr}
